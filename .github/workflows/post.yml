@@ -2,12 +2,22 @@ name: Kindle to X
 
 on:
   schedule:
-    - cron: '0 17 * * 1'  # Every Monday 9am PST (17:00 UTC)
-  workflow_dispatch:  # Allows manual trigger for testing
+    - cron: '0 17 * * 0'   # Sunday 9am PST - generate
+    - cron: '0 17 * * 1'   # Monday 9am PST - post tweet 1
+    - cron: '0 20 * * 1'   # Monday 12pm PST - post tweet 2
+    - cron: '0 23 * * 1'   # Monday 3pm PST - post tweet 3
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: 'Mode to run: generate or post'
+        required: true
+        default: 'generate'
 
 jobs:
-  post:
+  run:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
 
     steps:
       - name: Checkout code
@@ -21,6 +31,17 @@ jobs:
       - name: Install dependencies
         run: pip install anthropic tweepy requests
 
+      - name: Determine mode
+        id: mode
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "mode=${{ github.event.inputs.mode }}" >> $GITHUB_OUTPUT
+          elif [ "${{ github.event.schedule }}" = "0 17 * * 0" ]; then
+            echo "mode=generate" >> $GITHUB_OUTPUT
+          else
+            echo "mode=post" >> $GITHUB_OUTPUT
+          fi
+
       - name: Run script
         env:
           READWISE_TOKEN: ${{ secrets.READWISE_TOKEN }}
@@ -29,4 +50,13 @@ jobs:
           X_API_SECRET: ${{ secrets.X_API_SECRET }}
           X_ACCESS_TOKEN: ${{ secrets.X_ACCESS_TOKEN }}
           X_ACCESS_SECRET: ${{ secrets.X_ACCESS_SECRET }}
+          MODE: ${{ steps.mode.outputs.mode }}
         run: python main.py
+
+      - name: Save state back to repo
+        run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+          git add state.json
+          git diff --staged --quiet || git commit -m "Update state [skip ci]"
+          git push
