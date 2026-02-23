@@ -84,17 +84,22 @@ def generate_posts(highlights, book_title, book_author):
     client = anthropic.Anthropic(api_key=ANTHROPIC_API_KEY)
     highlights_text = "\n".join(f"- {h}" for h in highlights)
 
-    prompt = f"""You are a book insight assistant helping a product manager share learnings on X (Twitter).
+     prompt = f"""You are a book insight assistant helping a product manager share learnings on X (Twitter).
 
 Based on these Kindle highlights from '{book_title}' by {book_author}, write a Twitter thread of 3-5 tweets.
 
 Rules:
 - The first tweet must introduce the book: include the full title and author, and set up what the thread is about
-- Each subsequent tweet should extract a practical lesson specifically relevant to product management - think prioritization, user research, team dynamics, strategy, decision making, stakeholder management, or building products
+- Each subsequent tweet must do two things:
+    1. Ground the insight in the original book context - reference the specific idea, character, situation, or concept from the book that the highlight refers to, so that readers who have read the book immediately recognize it
+    2. Connect that reference to a practical product management lesson - think prioritization, user research, team dynamics, strategy, decision making, stakeholder management, or building products
+- The connection between the book reference and the PM lesson should feel natural, not forced
 - Each tweet must be max 280 characters
 - Plain text only - no emojis, no icons, no em dashes
-- Each tweet should be standalone and insightful
 - End the last tweet with a summary or call to action for PMs reading
+
+Example structure for each tweet (not a template, just to illustrate):
+"In [book reference], [author] shows [original idea]. For PMs, this means [practical PM lesson]."
 
 Return only the tweets, numbered 1. 2. 3. etc.
 
