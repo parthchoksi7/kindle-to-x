@@ -5,13 +5,19 @@
     "The logical statements entered into the notebook are broken down into six categories: (1) statement of the problem, (2) hypotheses as to the cause of the problem, (3) experiments designed to test each hypothesis, (4) predicted results of the experiments, (5) observed results of the experiments and (6) conclusions from the results of the experiments.",
     "The real University is a state of mind. It is that great heritage of rational thought that has been brought down to us through the centuries and which does not exist at any specific location. It\u2019s a state of mind which is regenerated throughout the centuries by a body of people who traditionally carry the title of professor, but even that title is not part of the real University. The real University is nothing less than the continuing body of reason itself."
   ],
-  "book_threads": {},
+  "book_threads": {
+    "58509025": {
+      "title": "Zen and the Art of Motorcycle Maintenance",
+      "first_tweet_id": "2025994906729173043",
+      "last_tweet_id": "2025994906729173043"
+    }
+  },
   "pending_tweets": [
     {
       "order": 0,
       "text": "Zen and the Art of Motorcycle Maintenance by Robert Pirsig is not really about motorcycles. It is about how we think, solve problems, and find quality in our work. Here are 2 lessons PMs can take from it.",
-      "posted": false,
-      "tweet_id": null,
+      "posted": true,
+      "tweet_id": "2025994906729173043",
       "book_id": "58509025",
       "book_title": "Zen and the Art of Motorcycle Maintenance"
     },
