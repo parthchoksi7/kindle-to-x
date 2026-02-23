@@ -4,7 +4,7 @@ import json
 import requests
 import anthropic
 import tweepy
-from datetime import datetime, timedelta, timezone
+from datetime import datetime, timezone
 
 # --- Config ---
 READWISE_TOKEN = os.environ["READWISE_TOKEN"]
@@ -13,6 +13,7 @@ X_API_KEY = os.environ["X_API_KEY"]
 X_API_SECRET = os.environ["X_API_SECRET"]
 X_ACCESS_TOKEN = os.environ["X_ACCESS_TOKEN"]
 X_ACCESS_SECRET = os.environ["X_ACCESS_SECRET"]
+MODE = os.environ.get("MODE", "generate")
 
 STATE_FILE = "state.json"
 
@@ -23,7 +24,8 @@ def load_state():
             return json.load(f)
     return {
         "seen_highlights": [],
-        "book_threads": {}
+        "book_threads": {},
+        "pending_tweets": []
     }
 
 def save_state(state):
@@ -33,9 +35,7 @@ def save_state(state):
 # --- Fetch new highlights from Readwise ---
 def get_new_highlights(seen_highlights):
     headers = {"Authorization": f"Token {READWISE_TOKEN}"}
-    params = {
-        "page_size": 100
-    }
+    params = {"page_size": 100}
 
     response = requests.get(
         "https://readwise.io/api/v2/highlights/",
@@ -113,7 +113,7 @@ def generate_posts(highlights, book_title, book_author, is_continuing_thread):
 
     prompt = f"""You are a book insight assistant helping a product manager share learnings on X (Twitter).
 
-Based on these Kindle highlights from '{book_title}' by {book_author}, write a Twitter thread of 3-5 tweets.
+Based on these Kindle highlights from '{book_title}' by {book_author}, write a Twitter thread of exactly 3 tweets.
 
 Rules:
 - {intro_rule}
@@ -125,10 +125,7 @@ Rules:
 - Plain text only - no emojis, no icons, no em dashes
 - End the last tweet with a summary or call to action for PMs reading
 
-Example structure for each tweet (not a template, just to illustrate):
-"In [book reference], [author] shows [original idea]. For PMs, this means [practical PM lesson]."
-
-Return only the tweets, numbered 1. 2. 3. etc.
+Return only the tweets, numbered 1. 2. 3.
 
 Highlights:
 {highlights_text}"""
@@ -143,8 +140,8 @@ Highlights:
     posts = re.findall(r'\d+\.\s(.+?)(?=\n\d+\.|$)', raw, re.DOTALL)
     return [clean_post(p.strip()) for p in posts if p.strip()]
 
-# --- Post as a thread to X ---
-def post_thread_to_x(posts, book_title, last_tweet_id=None):
+# --- Post a single tweet to X ---
+def post_single_tweet(tweet_text, reply_to_id=None):
     client = tweepy.Client(
         consumer_key=X_API_KEY,
         consumer_secret=X_API_SECRET,
@@ -152,100 +149,130 @@ def post_thread_to_x(posts, book_title, last_tweet_id=None):
         access_token_secret=X_ACCESS_SECRET
     )
 
-    if last_tweet_id:
-        print(f"Continuing existing thread for '{book_title}'...")
+    if reply_to_id:
+        response = client.create_tweet(
+            text=tweet_text,
+            in_reply_to_tweet_id=reply_to_id
+        )
     else:
-        print(f"Starting new thread for '{book_title}'...")
+        response = client.create_tweet(text=tweet_text)
 
-    reply_to_id = last_tweet_id
-    first_tweet_id = None
+    return response.data["id"]
 
-    for i, post in enumerate(posts):
-        try:
-            if reply_to_id is None:
-                response = client.create_tweet(text=post)
-            else:
-                response = client.create_tweet(
-                    text=post,
-                    in_reply_to_tweet_id=reply_to_id
-                )
-            tweet_id = response.data["id"]
+# --- GENERATE MODE: Run on Sunday 9am ---
+def run_generate():
+    print("Mode: GENERATE")
 
-            if first_tweet_id is None:
-                first_tweet_id = tweet_id
-
-            reply_to_id = tweet_id
-            print(f"Posted {i+1}/{len(posts)}: {post[:60]}...")
-        except Exception as e:
-            print(f"Failed to post tweet {i+1}: {e}")
-            raise
-
-    return first_tweet_id, reply_to_id
-
-# --- Main ---
-def main():
-    print(f"Running at {datetime.now(timezone.utc).isoformat()}")
-
-    # Load state
     state = load_state()
     seen_highlights = state.get("seen_highlights", [])
     book_threads = state.get("book_threads", {})
 
-    # Step 1: Get new highlights
-    try:
-        book_id, book_title, book_author, highlights = get_new_highlights(seen_highlights)
-    except Exception as e:
-        print(f"Error fetching highlights: {e}")
-        raise
+    # Check if there are already pending tweets from last week
+    pending = state.get("pending_tweets", [])
+    if pending:
+        unposted = [t for t in pending if not t.get("posted")]
+        if unposted:
+            print(f"Warning: {len(unposted)} unposted tweets from last week. Clearing and regenerating.")
+
+    # Get new highlights
+    book_id, book_title, book_author, highlights = get_new_highlights(seen_highlights)
 
     if not highlights:
-        print("Nothing to post this week.")
+        print("Nothing to generate this week.")
         return
 
-    # Step 2: Check if this book already has a thread
+    # Check if continuing thread
     book_thread = book_threads.get(book_id, {})
     last_tweet_id = book_thread.get("last_tweet_id")
     is_continuing_thread = last_tweet_id is not None
 
-    if is_continuing_thread:
-        print(f"Continuing existing thread for '{book_title}' from tweet {last_tweet_id}")
-    else:
-        print(f"Starting new thread for '{book_title}'")
+    # Generate posts
+    posts = generate_posts(highlights, book_title, book_author, is_continuing_thread)
+    print(f"\nGenerated {len(posts)} posts:")
+    for i, p in enumerate(posts):
+        print(f"{i+1}. {p}")
 
-    # Step 3: Generate posts
-    try:
-        posts = generate_posts(highlights, book_title, book_author, is_continuing_thread)
-        print(f"\nGenerated {len(posts)} posts:")
-        for i, p in enumerate(posts):
-            print(f"{i+1}. {p}")
-    except Exception as e:
-        print(f"Error generating posts with Claude: {e}")
-        raise
-
-    # Step 4: Post thread to X
-    try:
-        first_tweet_id, last_tweet_id = post_thread_to_x(
-            posts,
-            book_title,
-            last_tweet_id=last_tweet_id
-        )
-        print("\nAll posted successfully!")
-    except Exception as e:
-        print(f"Error posting to X: {e}")
-        raise
-
-    # Step 5: Update and save state
-    if book_id not in book_threads:
-        book_threads[book_id] = {
-            "title": book_title,
-            "first_tweet_id": first_tweet_id
+    # Save pending tweets to state
+    state["pending_tweets"] = [
+        {
+            "order": i,
+            "text": post,
+            "posted": False,
+            "tweet_id": None,
+            "book_id": book_id,
+            "book_title": book_title
         }
-    book_threads[book_id]["last_tweet_id"] = last_tweet_id
-
+        for i, post in enumerate(posts)
+    ]
     state["seen_highlights"] = list(set(seen_highlights + highlights))
-    state["book_threads"] = book_threads
     save_state(state)
-    print("State saved.")
+    print("\nTweets saved to state. Ready to post on Monday.")
+
+# --- POST MODE: Run 3x on Monday ---
+def run_post():
+    print("Mode: POST")
+
+    state = load_state()
+    pending = state.get("pending_tweets", [])
+    book_threads = state.get("book_threads", {})
+
+    # Find next unposted tweet
+    unposted = [t for t in pending if not t.get("posted")]
+
+    if not unposted:
+        print("No pending tweets to post.")
+        return
+
+    tweet = unposted[0]
+    book_id = tweet.get("book_id")
+    book_title = tweet.get("book_title")
+    tweet_text = tweet.get("text")
+    tweet_order = tweet.get("order")
+
+    # Get reply_to_id for thread continuity
+    book_thread = book_threads.get(book_id, {})
+    last_tweet_id = book_thread.get("last_tweet_id")
+
+    print(f"Posting tweet {tweet_order + 1} for '{book_title}':")
+    print(tweet_text)
+
+    try:
+        tweet_id = post_single_tweet(tweet_text, reply_to_id=last_tweet_id)
+        print(f"Posted successfully. Tweet ID: {tweet_id}")
+
+        # Mark as posted
+        for t in pending:
+            if t["order"] == tweet_order:
+                t["posted"] = True
+                t["tweet_id"] = str(tweet_id)
+
+        # Update book thread
+        if book_id not in book_threads:
+            book_threads[book_id] = {
+                "title": book_title,
+                "first_tweet_id": str(tweet_id)
+            }
+        book_threads[book_id]["last_tweet_id"] = str(tweet_id)
+
+        state["pending_tweets"] = pending
+        state["book_threads"] = book_threads
+        save_state(state)
+
+    except Exception as e:
+        print(f"Failed to post tweet: {e}")
+        raise
+
+# --- Main ---
+def main():
+    print(f"Running at {datetime.now(timezone.utc).isoformat()}")
+    print(f"Mode: {MODE}")
+
+    if MODE == "generate":
+        run_generate()
+    elif MODE == "post":
+        run_post()
+    else:
+        raise Exception(f"Unknown mode: {MODE}")
 
 if __name__ == "__main__":
     main()
