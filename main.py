@@ -1,6 +1,5 @@
 import os
 import re
-import json
 import requests
 import anthropic
 import tweepy
@@ -16,7 +15,6 @@ X_ACCESS_SECRET = os.environ["X_ACCESS_SECRET"]
 
 # --- Fetch new highlights from Readwise ---
 def get_new_highlights():
-    # Get highlights updated in the last 8 days to avoid missing any
     since = (datetime.now(timezone.utc) - timedelta(days=8)).isoformat()
 
     headers = {"Authorization": f"Token {READWISE_TOKEN}"}
@@ -39,9 +37,8 @@ def get_new_highlights():
 
     if not results:
         print("No new highlights found this week.")
-        return None, None
+        return None, None, None
 
-    # Get the most recent book
     # Group highlights by book
     books = {}
     for h in results:
@@ -59,18 +56,21 @@ def get_new_highlights():
     most_recent_book_id = max(books, key=lambda b: books[b]["latest"])
     highlights = books[most_recent_book_id]["highlights"]
 
-    # Get book title
+    # Get book title and author
     book_response = requests.get(
         f"https://readwise.io/api/v2/books/{most_recent_book_id}/",
         headers=headers
     )
     book_title = "Unknown Book"
+    book_author = "Unknown Author"
     if book_response.status_code == 200:
-        book_title = book_response.json().get("title", "Unknown Book")
+        book_data = book_response.json()
+        book_title = book_data.get("title", "Unknown Book")
+        book_author = book_data.get("author", "Unknown Author")
 
-    print(f"Book: {book_title}")
+    print(f"Book: {book_title} by {book_author}")
     print(f"New highlights: {len(highlights)}")
-    return book_title, highlights
+    return book_title, book_author, highlights
 
 # --- Clean posts ---
 def clean_post(post):
@@ -80,11 +80,23 @@ def clean_post(post):
     return post
 
 # --- Generate posts with Claude ---
-def generate_posts(highlights, book_title):
+def generate_posts(highlights, book_title, book_author):
     client = anthropic.Anthropic(api_key=ANTHROPIC_API_KEY)
     highlights_text = "\n".join(f"- {h}" for h in highlights)
 
-    prompt = f"""You are a book insight assistant. Based on these Kindle highlights from '{book_title}', write 3-5 tweets (max 280 chars each) sharing the most valuable learnings. Make them insightful and standalone. Use plain text only - no emojis, no icons, no em dashes. Return only the tweets, numbered 1. 2. 3. etc.
+    prompt = f"""You are a book insight assistant helping a product manager share learnings on X (Twitter).
+
+Based on these Kindle highlights from '{book_title}' by {book_author}, write a Twitter thread of 3-5 tweets.
+
+Rules:
+- The first tweet must introduce the book: include the full title and author, and set up what the thread is about
+- Each subsequent tweet should extract a practical lesson specifically relevant to product management - think prioritization, user research, team dynamics, strategy, decision making, stakeholder management, or building products
+- Each tweet must be max 280 characters
+- Plain text only - no emojis, no icons, no em dashes
+- Each tweet should be standalone and insightful
+- End the last tweet with a summary or call to action for PMs reading
+
+Return only the tweets, numbered 1. 2. 3. etc.
 
 Highlights:
 {highlights_text}"""
@@ -99,8 +111,8 @@ Highlights:
     posts = re.findall(r'\d+\.\s(.+?)(?=\n\d+\.|$)', raw, re.DOTALL)
     return [clean_post(p.strip()) for p in posts if p.strip()]
 
-# --- Post to X ---
-def post_to_x(posts, book_title):
+# --- Post as a thread to X ---
+def post_thread_to_x(posts, book_title):
     client = tweepy.Client(
         consumer_key=X_API_KEY,
         consumer_secret=X_API_SECRET,
@@ -108,10 +120,21 @@ def post_to_x(posts, book_title):
         access_token_secret=X_ACCESS_SECRET
     )
 
-    print(f"\nPosting {len(posts)} tweets about '{book_title}'...")
+    print(f"\nPosting thread of {len(posts)} tweets about '{book_title}'...")
+    
+    reply_to_id = None
     for i, post in enumerate(posts):
         try:
-            client.create_tweet(text=post)
+            if reply_to_id is None:
+                # First tweet - no reply
+                response = client.create_tweet(text=post)
+            else:
+                # Reply to previous tweet to form thread
+                response = client.create_tweet(
+                    text=post,
+                    in_reply_to_tweet_id=reply_to_id
+                )
+            reply_to_id = response.data["id"]
             print(f"Posted {i+1}/{len(posts)}: {post[:60]}...")
         except Exception as e:
             print(f"Failed to post tweet {i+1}: {e}")
@@ -123,7 +146,7 @@ def main():
 
     # Step 1: Get highlights
     try:
-        book_title, highlights = get_new_highlights()
+        book_title, book_author, highlights = get_new_highlights()
     except Exception as e:
         print(f"Error fetching highlights: {e}")
         raise
@@ -134,7 +157,7 @@ def main():
 
     # Step 2: Generate posts
     try:
-        posts = generate_posts(highlights, book_title)
+        posts = generate_posts(highlights, book_title, book_author)
         print(f"\nGenerated {len(posts)} posts:")
         for i, p in enumerate(posts):
             print(f"{i+1}. {p}")
@@ -142,9 +165,9 @@ def main():
         print(f"Error generating posts with Claude: {e}")
         raise
 
-    # Step 3: Post to X
+    # Step 3: Post thread to X
     try:
-        post_to_x(posts, book_title)
+        post_thread_to_x(posts, book_title)
         print("\nAll done!")
     except Exception as e:
         print(f"Error posting to X: {e}")
