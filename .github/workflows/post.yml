@@ -6,6 +6,8 @@ on:
     - cron: '0 17 * * 1'   # Monday 9am PST - post tweet 1
     - cron: '0 20 * * 1'   # Monday 12pm PST - post tweet 2
     - cron: '0 23 * * 1'   # Monday 3pm PST - post tweet 3
+    - cron: '0 17 * * 3'   # Wednesday 9am PST - post single
+    - cron: '0 17 * * 5'   # Friday 9am PST - post single
   workflow_dispatch:
     inputs:
       mode:
