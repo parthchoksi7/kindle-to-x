@@ -33,7 +33,7 @@ def save_state(state):
     with open(STATE_FILE, "w") as f:
         json.dump(state, f, indent=2)
 
-# --- Fetch all highlights from Readwise ---
+# --- Fetch all highlights from Readwise (once) ---
 def fetch_all_highlights():
     headers = {"Authorization": f"Token {READWISE_TOKEN}"}
     all_results = []
@@ -56,6 +56,7 @@ def fetch_all_highlights():
             break
         page += 1
 
+    print(f"Fetched {len(all_results)} total highlights from Readwise.")
     return all_results
 
 # --- Fetch book metadata ---
@@ -71,12 +72,10 @@ def fetch_book(book_id):
     return "Unknown Book", "Unknown Author"
 
 # --- Get new highlights from most recent book ---
-def get_new_highlights(seen_highlights):
-    all_highlights = fetch_all_highlights()
-
+def get_new_highlights(seen_highlights, all_highlights):
     if not all_highlights:
         print("No highlights found in Readwise.")
-        return None, None, None, None
+        return None, None, None, None, None
 
     # Filter out already seen highlights
     seen_set = set(seen_highlights)
@@ -84,7 +83,7 @@ def get_new_highlights(seen_highlights):
 
     if not new_results:
         print("No new highlights found since last run.")
-        return None, None, None, None
+        return None, None, None, None, None
 
     # Group new highlights by book
     books = {}
@@ -107,10 +106,10 @@ def get_new_highlights(seen_highlights):
     most_recent_book_id = max(books, key=lambda b: books[b]["latest"])
     highlights = books[most_recent_book_id]["highlights"]
 
-    # Sort by location
+    # Sort highlights by location
     highlights.sort(key=lambda h: h["location"] or 0)
 
-    # Estimate book length from max location across ALL highlights for this book
+    # Estimate book length from max location across all highlights for this book
     all_book_highlights = [h for h in all_highlights if str(h.get("book_id")) == most_recent_book_id]
     max_location = max((h.get("location") or 0) for h in all_book_highlights)
 
@@ -122,10 +121,8 @@ def get_new_highlights(seen_highlights):
 
     return most_recent_book_id, book_title, book_author, highlights, max_location
 
-# --- Get a random highlight from past books ---
-def get_past_highlight(seen_highlights, current_book_id):
-    all_highlights = fetch_all_highlights()
-
+# --- Get a random highlight from a past book ---
+def get_past_highlight(seen_highlights, current_book_id, all_highlights):
     # Only use highlights from books other than current book
     past = [
         h for h in all_highlights
@@ -137,7 +134,7 @@ def get_past_highlight(seen_highlights, current_book_id):
         print("No past highlights found.")
         return None, None, None, None, None
 
-    # Pick a random one
+    # Pick a random highlight
     chosen = random.choice(past)
     book_id = str(chosen.get("book_id"))
     book_title, book_author = fetch_book(book_id)
@@ -287,8 +284,12 @@ def run_generate():
     seen_highlights = state.get("seen_highlights", [])
     book_threads = state.get("book_threads", {})
 
+    # Fetch all highlights once
+    print("Fetching all highlights from Readwise...")
+    all_highlights = fetch_all_highlights()
+
     # Get new highlights from current book
-    result = get_new_highlights(seen_highlights)
+    result = get_new_highlights(seen_highlights, all_highlights)
     if result[0] is None:
         print("Nothing to generate this week.")
         return
@@ -306,14 +307,14 @@ def run_generate():
     )
 
     # Generate Wednesday single post from past book
-    wed_result = get_past_highlight(seen_highlights, book_id)
+    wed_result = get_past_highlight(seen_highlights, book_id, all_highlights)
     wednesday_post = None
     if wed_result[0]:
         wed_title, wed_author, wed_text, wed_location, wed_max = wed_result
         wednesday_post = generate_single_post(wed_text, wed_title, wed_author, wed_location, wed_max)
 
     # Generate Friday single post from past book
-    fri_result = get_past_highlight(seen_highlights, book_id)
+    fri_result = get_past_highlight(seen_highlights, book_id, all_highlights)
     friday_post = None
     if fri_result[0]:
         fri_title, fri_author, fri_text, fri_location, fri_max = fri_result
@@ -332,7 +333,6 @@ def run_generate():
     # Save all pending tweets to state
     pending = []
 
-    # Monday tweets (order 0, 1, 2)
     for i, post in enumerate(monday_posts):
         pending.append({
             "order": i,
@@ -344,7 +344,6 @@ def run_generate():
             "book_title": book_title
         })
 
-    # Wednesday tweet (order 3)
     if wednesday_post:
         pending.append({
             "order": 3,
@@ -356,7 +355,6 @@ def run_generate():
             "book_title": None
         })
 
-    # Friday tweet (order 4)
     if friday_post:
         pending.append({
             "order": 4,
@@ -373,7 +371,7 @@ def run_generate():
     save_state(state)
     print("All posts saved to state.")
 
-# --- POST MODE: Posts next pending tweet for today ---
+# --- POST MODE ---
 def run_post():
     print("Mode: POST")
 
@@ -397,7 +395,7 @@ def run_post():
     tweet_order = tweet.get("order")
     day = tweet.get("day")
 
-    # For Monday tweets, maintain thread continuity
+    # For Monday tweets maintain thread continuity
     reply_to_id = None
     if day == "monday" and book_id:
         book_thread = book_threads.get(book_id, {})
