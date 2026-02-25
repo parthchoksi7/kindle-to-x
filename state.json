@@ -1,9 +1,10 @@
 {
   "seen_highlights": [
-    "The real University is not a material object. It is not a group of buildings that can be defended by police. He explained that when a college lost its accreditation, nobody came and shut down the school. There were no legal penalties, no fines, no jail sentences. Classes did not stop. Everything went on just as before. Students got the same education they would if the school didn\u2019t lose its accreditation. All that would happen, Phaedrus said, would simply be an official recognition of a condition that already existed. It would be similar to excommunication. What would happen is that the real University, which no legislature can dictate to and which can never be identified by any location of bricks or boards or glass, would simply declare that this place was no longer \u2018holy ground.\u2019 The real University would vanish from it, and all that would be left was the bricks and the books and the material manifestation.",
-    "You are never dedicated to something you have complete confidence in. No one is fanatically shouting that the sun is going to rise tomorrow. They know it\u2019s going to rise tomorrow. When people are fanatically dedicated to political or religious faiths or any other kinds of dogmas or goals, it\u2019s always because these dogmas or goals are in doubt.",
     "The logical statements entered into the notebook are broken down into six categories: (1) statement of the problem, (2) hypotheses as to the cause of the problem, (3) experiments designed to test each hypothesis, (4) predicted results of the experiments, (5) observed results of the experiments and (6) conclusions from the results of the experiments.",
-    "The real University is a state of mind. It is that great heritage of rational thought that has been brought down to us through the centuries and which does not exist at any specific location. It\u2019s a state of mind which is regenerated throughout the centuries by a body of people who traditionally carry the title of professor, but even that title is not part of the real University. The real University is nothing less than the continuing body of reason itself."
+    "\u2018Peace of mind isn\u2019t at all superficial, really,\u2019 I expound. \u2018It\u2019s the whole thing. That which produces it is good maintenance; that which disturbs it is poor maintenance. What we call workability of the machine is just an objectification of this peace of mind. The ultimate test\u2019s always your own serenity. If you don\u2019t have this when you start and maintain it while you\u2019re working you\u2019re likely to build your personal problems right into the machine itself.\u2019 They just look at me, thinking about this. \u2018It\u2019s an unconventional concept,\u2019 I say, \u2018but conventional reason bears it out. The material object of observation, the bicycle or rotisserie, can\u2019t be right or wrong. Molecules are molecules. They don\u2019t have any ethical codes to follow except those people give them. The test of the machine is the satisfaction it gives you. There isn\u2019t any other test. If the machine produces tranquillity it\u2019s right. If it disturbs you it\u2019s wrong until either the machine or your mind is changed. The test of the machine\u2019s always your own mind. There isn\u2019t any other test.\u2019 DeWeese asks, \u2018What if the machine is wrong and I feel peaceful about it?\u2019 Laughter. I reply, \u2018That\u2019s self-contradictory. If you really don\u2019t care you aren\u2019t going to know it\u2019s wrong. The thought\u2019ll never occur to you. The act of pronouncing it wrong\u2019s a form of caring.\u2019",
+    "The real University is not a material object. It is not a group of buildings that can be defended by police. He explained that when a college lost its accreditation, nobody came and shut down the school. There were no legal penalties, no fines, no jail sentences. Classes did not stop. Everything went on just as before. Students got the same education they would if the school didn\u2019t lose its accreditation. All that would happen, Phaedrus said, would simply be an official recognition of a condition that already existed. It would be similar to excommunication. What would happen is that the real University, which no legislature can dictate to and which can never be identified by any location of bricks or boards or glass, would simply declare that this place was no longer \u2018holy ground.\u2019 The real University would vanish from it, and all that would be left was the bricks and the books and the material manifestation.",
+    "The real University is a state of mind. It is that great heritage of rational thought that has been brought down to us through the centuries and which does not exist at any specific location. It\u2019s a state of mind which is regenerated throughout the centuries by a body of people who traditionally carry the title of professor, but even that title is not part of the real University. The real University is nothing less than the continuing body of reason itself.",
+    "You are never dedicated to something you have complete confidence in. No one is fanatically shouting that the sun is going to rise tomorrow. They know it\u2019s going to rise tomorrow. When people are fanatically dedicated to political or religious faiths or any other kinds of dogmas or goals, it\u2019s always because these dogmas or goals are in doubt."
   ],
   "book_threads": {
     "58509025": {
@@ -15,15 +16,17 @@
   "pending_tweets": [
     {
       "order": 0,
-      "text": "Zen and the Art of Motorcycle Maintenance by Robert Pirsig is not really about motorcycles. It is about how we think, solve problems, and find quality in our work. Here are 2 lessons PMs can take from it.",
-      "posted": true,
-      "tweet_id": "2025994906729173043",
+      "day": "monday",
+      "text": "Pirsig's actual quality test for any piece of work: does it give you peace of mind? Not specs. Not metrics. Your own serenity. If you built something and it quietly bothers you, that feeling IS the diagnosis.",
+      "posted": false,
+      "tweet_id": null,
       "book_id": "58509025",
       "book_title": "Zen and the Art of Motorcycle Maintenance"
     },
     {
       "order": 1,
-      "text": "Pirsig's narrator uses a strict scientific notebook to diagnose his bike: define the problem, list hypotheses, test each one, record results. PMs often skip straight to solutions. Slowing down to separate problem from hypothesis leads to better decisions and less wasted build time.",
+      "day": "monday",
+      "text": "\"The material object can't be right or wrong. Molecules are molecules.\" The machine has no ethics. Only you do. So when something feels off, that's not irrational. That's information. You're the only instrument sensitive enough to detect it.",
       "posted": false,
       "tweet_id": null,
       "book_id": "58509025",
@@ -31,11 +34,30 @@
     },
     {
       "order": 2,
-      "text": "Phaedrus argues the real University is not buildings or accreditation but a living body of reason. Your product is not your roadmap or your tech stack. It is the understanding you build with users. Lose that and only the bricks remain. PMs: protect the thinking, not the artifacts.",
+      "day": "monday",
+      "text": "DeWeese's gotcha question - what if it's wrong but I feel fine? Pirsig's answer is brutal and correct. The moment you call it wrong, you've already cared. Indifference and criticism can't coexist. You don't get to claim detachment while also judging.",
       "posted": false,
       "tweet_id": null,
       "book_id": "58509025",
       "book_title": "Zen and the Art of Motorcycle Maintenance"
+    },
+    {
+      "order": 3,
+      "day": "wednesday",
+      "text": "Once upon a time... that's how Ebi Atawodi suggests starting your product vision. Not a slide full of bullet points. A story with a before, a turning point, and how people feel after. Crafting a Compelling Product Vision makes this surprisingly hard to argue with.",
+      "posted": false,
+      "tweet_id": null,
+      "book_id": null,
+      "book_title": null
+    },
+    {
+      "order": 4,
+      "day": "friday",
+      "text": "Most stress-reduction advice tells you to change your thoughts. Ikigai by Garcia and Miralles disagrees. Just notice them. The spiral loses power when you see it coming. That's the whole game.",
+      "posted": false,
+      "tweet_id": null,
+      "book_id": null,
+      "book_title": null
     }
   ]
 }
