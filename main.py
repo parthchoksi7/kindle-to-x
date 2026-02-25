@@ -1,6 +1,7 @@
 import os
 import re
 import json
+import time
 import random
 import requests
 import anthropic
@@ -45,6 +46,20 @@ def fetch_all_highlights():
             headers=headers,
             params={"page_size": 100, "page": page}
         )
+
+        if response.status_code == 429:
+            wait_time = 60
+            try:
+                detail = response.json().get("detail", "")
+                match = re.search(r'\d+', detail)
+                if match:
+                    wait_time = int(match.group()) + 5
+            except Exception:
+                pass
+            print(f"Rate limited. Waiting {wait_time} seconds before retrying...")
+            time.sleep(wait_time)
+            continue
+
         if response.status_code != 200:
             raise Exception(f"Readwise API error: {response.status_code} - {response.text}")
 
@@ -123,7 +138,6 @@ def get_new_highlights(seen_highlights, all_highlights):
 
 # --- Get a random highlight from a past book ---
 def get_past_highlight(seen_highlights, current_book_id, all_highlights):
-    # Only use highlights from books other than current book
     past = [
         h for h in all_highlights
         if str(h.get("book_id")) != str(current_book_id)
@@ -134,12 +148,10 @@ def get_past_highlight(seen_highlights, current_book_id, all_highlights):
         print("No past highlights found.")
         return None, None, None, None, None
 
-    # Pick a random highlight
     chosen = random.choice(past)
     book_id = str(chosen.get("book_id"))
     book_title, book_author = fetch_book(book_id)
 
-    # Get max location for this book to estimate position
     book_highlights = [h for h in all_highlights if str(h.get("book_id")) == book_id]
     max_location = max((h.get("location") or 0) for h in book_highlights)
 
@@ -284,11 +296,9 @@ def run_generate():
     seen_highlights = state.get("seen_highlights", [])
     book_threads = state.get("book_threads", {})
 
-    # Fetch all highlights once
     print("Fetching all highlights from Readwise...")
     all_highlights = fetch_all_highlights()
 
-    # Get new highlights from current book
     result = get_new_highlights(seen_highlights, all_highlights)
     if result[0] is None:
         print("Nothing to generate this week.")
@@ -296,24 +306,20 @@ def run_generate():
 
     book_id, book_title, book_author, highlights, max_location = result
 
-    # Check if continuing thread
     book_thread = book_threads.get(book_id, {})
     last_tweet_id = book_thread.get("last_tweet_id")
     is_continuing_thread = last_tweet_id is not None
 
-    # Generate Monday thread posts
     monday_posts = generate_thread_posts(
         highlights, book_title, book_author, max_location, is_continuing_thread
     )
 
-    # Generate Wednesday single post from past book
     wed_result = get_past_highlight(seen_highlights, book_id, all_highlights)
     wednesday_post = None
     if wed_result[0]:
         wed_title, wed_author, wed_text, wed_location, wed_max = wed_result
         wednesday_post = generate_single_post(wed_text, wed_title, wed_author, wed_location, wed_max)
 
-    # Generate Friday single post from past book
     fri_result = get_past_highlight(seen_highlights, book_id, all_highlights)
     friday_post = None
     if fri_result[0]:
@@ -330,7 +336,6 @@ def run_generate():
     if friday_post:
         print(f"Friday post:\n{friday_post}\n")
 
-    # Save all pending tweets to state
     pending = []
 
     for i, post in enumerate(monday_posts):
@@ -382,7 +387,6 @@ def run_post():
     today = datetime.now(timezone.utc).strftime("%A").lower()
     print(f"Today is {today}")
 
-    # Find next unposted tweet for today
     todays_tweets = [t for t in pending if t.get("day") == today and not t.get("posted")]
 
     if not todays_tweets:
@@ -395,7 +399,6 @@ def run_post():
     tweet_order = tweet.get("order")
     day = tweet.get("day")
 
-    # For Monday tweets maintain thread continuity
     reply_to_id = None
     if day == "monday" and book_id:
         book_thread = book_threads.get(book_id, {})
@@ -408,13 +411,11 @@ def run_post():
         tweet_id = post_single_tweet(tweet_text, reply_to_id=reply_to_id)
         print(f"Posted successfully. Tweet ID: {tweet_id}")
 
-        # Mark as posted
         for t in pending:
             if t["order"] == tweet_order:
                 t["posted"] = True
                 t["tweet_id"] = str(tweet_id)
 
-        # Update book thread for Monday tweets
         if day == "monday" and book_id:
             if book_id not in book_threads:
                 book_threads[book_id] = {
