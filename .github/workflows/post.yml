@@ -2,16 +2,18 @@ name: Kindle to X
 
 on:
   schedule:
-    - cron: '0 17 * * 0'   # Sunday 9am PST - generate
-    - cron: '0 17 * * 1'   # Monday 9am PST - post tweet 1
-    - cron: '0 20 * * 1'   # Monday 12pm PST - post tweet 2
-    - cron: '0 23 * * 1'   # Monday 3pm PST - post tweet 3
-    - cron: '0 17 * * 3'   # Wednesday 9am PST - post single
-    - cron: '0 17 * * 5'   # Friday 9am PST - post single
+    - cron: '0 17 * * 5'   # Friday 9am PST    - ask interview questions
+    - cron: '0 17 * * 0'   # Sunday 9am PST    - generate book + interview tweets
+    - cron: '0 17 * * 1'   # Monday 9am PST    - post book tweet 1
+    - cron: '0 20 * * 1'   # Monday 12pm PST   - post book tweet 2
+    - cron: '0 23 * * 1'   # Monday 3pm PST    - post book tweet 3
+    - cron: '0 17 * * 3'   # Wednesday 9am PST  - post interview tweet 1
+    - cron: '0 20 * * 3'   # Wednesday 12pm PST - post interview tweet 2
+    - cron: '0 17 * * 4'   # Thursday 9am PST   - post standalone book tweet
   workflow_dispatch:
     inputs:
       mode:
-        description: 'Mode to run: generate or post'
+        description: 'Mode: generate | post | interview_ask | post_interview | post_standalone'
         required: true
         default: 'generate'
 
@@ -20,6 +22,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+      issues: write
 
     steps:
       - name: Checkout code
@@ -38,8 +41,16 @@ jobs:
         run: |
           if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
             echo "mode=${{ github.event.inputs.mode }}" >> $GITHUB_OUTPUT
+          elif [ "${{ github.event.schedule }}" = "0 17 * * 5" ]; then
+            echo "mode=interview_ask" >> $GITHUB_OUTPUT
           elif [ "${{ github.event.schedule }}" = "0 17 * * 0" ]; then
             echo "mode=generate" >> $GITHUB_OUTPUT
+          elif [ "${{ github.event.schedule }}" = "0 17 * * 3" ]; then
+            echo "mode=post_interview" >> $GITHUB_OUTPUT
+          elif [ "${{ github.event.schedule }}" = "0 20 * * 3" ]; then
+            echo "mode=post_interview" >> $GITHUB_OUTPUT
+          elif [ "${{ github.event.schedule }}" = "0 17 * * 4" ]; then
+            echo "mode=post_standalone" >> $GITHUB_OUTPUT
           else
             echo "mode=post" >> $GITHUB_OUTPUT
           fi
@@ -52,6 +63,8 @@ jobs:
           X_API_SECRET: ${{ secrets.X_API_SECRET }}
           X_ACCESS_TOKEN: ${{ secrets.X_ACCESS_TOKEN }}
           X_ACCESS_SECRET: ${{ secrets.X_ACCESS_SECRET }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPO: ${{ github.repository }}
           MODE: ${{ steps.mode.outputs.mode }}
         run: python main.py
 
