@@ -30,16 +30,26 @@ VOICE_EXAMPLES = [
     }
 ]
 
+# --- Who this person is --- used to generate better questions and more specific tweets
+PERSON_CONTEXT = """
+Who they are:
+- Product manager at a tech company working on complex, multi-stakeholder products
+- Trains with a personal trainer - sessions feel like deep work time, a rare space away from meetings and Slack to think through hard problems
+- Currently on a short training break - reading has filled the gap naturally, habits trade off against each other
+- Dad to a 2.5 year old daughter
+- Heavy reader - uses Kindle highlights to capture ideas
+- Voice: direct, specific, slightly dry, no fluff. Talks like a person not a content creator.
+"""
+
 def get_voice_context():
-    if not VOICE_EXAMPLES:
-        return ""
     examples_text = ""
     for ex in VOICE_EXAMPLES:
         examples_text += f"Raw answer: \"{ex['a']}\"\nTweet written from it: \"{ex['tweet']}\"\n\n"
     return f"""Here are real examples of how this person talks and how their answers get turned into tweets.
 Use these to match their voice - direct, specific, no fluff, slightly dry:
 
-{examples_text}"""
+{examples_text}
+{PERSON_CONTEXT}"""
 
 # --- State Management ---
 def load_state():
@@ -164,7 +174,7 @@ def generate_posts(highlights, book_title, book_author, is_continuing_thread):
     else:
         intro_rule = "The first tweet must introduce the book: include the full title and author, and set up what the thread is about."
 
-    prompt = f"""You are a book insight assistant helping an anonymous product manager share learnings on X (Twitter).
+    prompt = f"""You are a book insight assistant helping a product manager share learnings on X (Twitter).
 
 Based on these Kindle highlights from '{book_title}' by {book_author}, write a Twitter thread of exactly 3 tweets.
 
@@ -196,21 +206,25 @@ Highlights:
 # --- Generate interview questions with Claude ---
 def generate_interview_questions():
     client = anthropic.Anthropic(api_key=ANTHROPIC_API_KEY)
+    voice_context = get_voice_context()
 
-    prompt = """You help an anonymous PM who runs @marginnotespm on X build their brand through short, specific posts.
+    prompt = f"""You help a PM who runs @marginnotespm on X build their brand through short, specific posts.
+
+{voice_context}
 
 Generate 2 questions to ask them this week to draw out something worth posting.
 
-The questions that work best for this person are ones that:
+The questions that work best are ones that:
 - Ask about a specific recent moment, not a general opinion
 - Feel like a therapist or a curious friend asking, not a journalist
 - Make them think but don't require a polished answer
-- Draw from real life: work friction, something their toddler said or did, a workout observation, something from a book
 
 Good question angles to rotate between:
 - A small frustration or friction at work they couldn't stop thinking about
 - Something their daughter did or said that reframed something for them
 - The last time they felt like a really good PM and what they were actually doing
+- What they think about during training sessions - what problem keeps coming back
+- How habits trade off against each other (e.g. when one drops, another fills the space)
 - An idea from a book they want to push back on
 - Something they changed their mind about recently
 - A moment where they noticed a gap between what they said and what they did
@@ -234,7 +248,7 @@ def generate_standalone_tweet(highlights, book_title, book_author):
     client = anthropic.Anthropic(api_key=ANTHROPIC_API_KEY)
     highlights_text = "\n".join(f"- {h}" for h in highlights)
 
-    prompt = f"""You help an anonymous PM who runs @marginnotespm on X.
+    prompt = f"""You help a PM who runs @marginnotespm on X.
 
 From these Kindle highlights from '{book_title}' by {book_author}, extract the single most striking or counterintuitive idea and write ONE standalone tweet about it.
 
@@ -264,17 +278,7 @@ def generate_reply_suggestions(issue_number):
     client = anthropic.Anthropic(api_key=ANTHROPIC_API_KEY)
     voice_context = get_voice_context()
 
-    # Search for recent popular tweets in PM and books space via X search URLs
-    search_topics = [
-        "product management insight",
-        "PM lesson learned",
-        "reading books insight",
-        "product manager mistake"
-    ]
-
-    # We can't call X API directly for search without elevated access,
-    # so we generate hypothetical high-engagement tweet scenarios Claude would reply to well
-    prompt = f"""You help an anonymous PM who runs @marginnotespm on X grow their following by replying to relevant tweets.
+    prompt = f"""You help a PM who runs @marginnotespm on X grow their following by replying to relevant tweets.
 
 {voice_context}
 
@@ -301,10 +305,9 @@ Generate 3 of these."""
 
     raw = response.content[0].text.strip()
 
-    # Post as a comment on the weekly issue
     comment_body = f"""## Reply suggestions for this week
 
-These are 3 tweets worth replying to in the PM/books space. Copy, tweak, and post manually - takes 5 min.
+3 tweets worth replying to in the PM/books space. Copy, tweak, post manually - takes 5 min.
 
 {raw}
 
@@ -320,7 +323,7 @@ def generate_interview_tweets(questions, answer_text):
     client = anthropic.Anthropic(api_key=ANTHROPIC_API_KEY)
     voice_context = get_voice_context()
 
-    prompt = f"""You help an anonymous PM who runs @marginnotespm on X craft tweets from their raw thoughts.
+    prompt = f"""You help a PM who runs @marginnotespm on X craft tweets from their raw thoughts.
 
 {voice_context}
 
@@ -335,7 +338,7 @@ Write a 2-tweet thread based on their answer. Rules:
 - Match the voice from the examples above - direct, no fluff, slightly dry
 - Be specific - use the actual details, friction, and texture from their answer
 - Start tweet 1 with the concrete situation or moment, not a generic setup line
-- Tweet 2 lands the insight or reframe - but leave it slightly open, not wrapped up too neatly
+- Tweet 2 lands the insight or reframe - leave it slightly open, not wrapped up too neatly
 - Plain text only - no emojis, no em dashes, no hashtags
 - Each tweet max 280 characters
 - Do not moralize or over-explain
@@ -380,11 +383,10 @@ def run_interview_ask():
         close_github_issue(old_issue)
         print(f"Closed old issue #{old_issue}")
 
-    # Generate fresh questions
     questions = generate_interview_questions()
     print(f"Generated questions: {questions}")
 
-    body = """Drop your answers as a single comment below. As casual as you like - rambling is fine, voice-note style works.
+    body = """Drop your answers as a single comment below. As casual as you like - rambling is fine.
 
 **Q1:** {}
 
@@ -430,7 +432,6 @@ def run_generate():
         for i, p in enumerate(posts):
             print(f"{i+1}. {p}")
 
-        # Generate standalone Thursday tweet from same highlights
         standalone = generate_standalone_tweet(highlights, book_title, book_author)
         print(f"\nGenerated standalone tweet:\n{standalone}")
 
@@ -467,7 +468,6 @@ def run_generate():
 
     if issue_number and questions:
         comments = get_issue_comments(issue_number)
-        # Ignore comments from bots (github-actions bot)
         user_comments = [c for c in comments if c.get("user", {}).get("type") != "Bot"]
 
         if user_comments:
@@ -492,7 +492,6 @@ def run_generate():
         else:
             print("No answer found on interview issue this week. Skipping interview tweets.")
 
-        # Always post reply suggestions to the issue regardless of whether they answered
         print("\nGenerating reply suggestions...")
         generate_reply_suggestions(issue_number)
 
@@ -511,7 +510,6 @@ def run_post():
     pending = state.get("pending_tweets", [])
     book_threads = state.get("book_threads", {})
 
-    # Only post book-type tweets on Monday
     unposted = [t for t in pending if not t.get("posted") and t.get("type") == "book"]
 
     if not unposted:
@@ -569,7 +567,6 @@ def run_post_interview():
     tweet_text = tweet.get("text")
     tweet_order = tweet.get("order")
 
-    # For tweet 2, reply to tweet 1 to form a thread
     reply_to_id = None
     if tweet_order > 0:
         prev = next((t for t in pending if t["order"] == tweet_order - 1), None)
