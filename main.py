@@ -133,11 +133,13 @@ def get_new_highlights(seen_highlights):
     books = {}
     for h in new_results:
         book_id = str(h.get("book_id"))
+        # Use highlighted_at (when you actually highlighted in Kindle) not updated (Readwise metadata)
+        highlighted_at = h.get("highlighted_at") or h.get("updated") or ""
         if book_id not in books:
-            books[book_id] = {"highlights": [], "latest": h.get("updated")}
+            books[book_id] = {"highlights": [], "latest": highlighted_at}
         books[book_id]["highlights"].append(h.get("text", "").strip())
-        if h.get("updated") > books[book_id]["latest"]:
-            books[book_id]["latest"] = h.get("updated")
+        if highlighted_at > books[book_id]["latest"]:
+            books[book_id]["latest"] = highlighted_at
 
     most_recent_book_id = max(books, key=lambda b: books[b]["latest"])
     highlights = books[most_recent_book_id]["highlights"]
