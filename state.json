@@ -30,8 +30,8 @@
     {
       "order": 3,
       "text": "Fanatical dedication is always a sign of doubt. Nobody shouts that the sun will rise tomorrow. They know it will. The louder someone defends a belief, the more you learn about their uncertainty, not their conviction.",
-      "posted": false,
-      "tweet_id": null,
+      "posted": true,
+      "tweet_id": "2027080266968445023",
       "book_id": "58509025",
       "book_title": "Zen and the Art of Motorcycle Maintenance",
       "type": "standalone"
