@@ -54,8 +54,13 @@ Use these to match their voice - direct, specific, no fluff, slightly dry:
 # --- State Management ---
 def load_state():
     if os.path.exists(STATE_FILE):
-        with open(STATE_FILE, "r") as f:
-            return json.load(f)
+        try:
+            with open(STATE_FILE, "r") as f:
+                content = f.read().strip()
+                if content:
+                    return json.loads(content)
+        except (json.JSONDecodeError, ValueError):
+            print("Warning: state.json corrupted or empty, resetting.")
     return {
         "seen_highlights": [],
         "book_threads": {},
