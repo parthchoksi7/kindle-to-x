@@ -65,6 +65,7 @@ jobs:
           X_ACCESS_SECRET: ${{ secrets.X_ACCESS_SECRET }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_REPO: ${{ github.repository }}
+          X_BEARER_TOKEN: ${{ secrets.X_BEARER_TOKEN }}
           MODE: ${{ steps.mode.outputs.mode }}
         run: python main.py
 
