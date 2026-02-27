@@ -16,6 +16,7 @@ X_ACCESS_SECRET = os.environ["X_ACCESS_SECRET"]
 GITHUB_TOKEN = os.environ["GITHUB_TOKEN"]
 GITHUB_REPO = os.environ["GITHUB_REPO"]  # e.g. "username/repo"
 X_BEARER_TOKEN = os.environ["X_BEARER_TOKEN"]
+X_USER_ID = os.environ["X_USER_ID"]
 MODE = os.environ.get("MODE", "generate")
 
 STATE_FILE = "state.json"
@@ -454,29 +455,12 @@ def post_single_tweet(tweet_text, reply_to_id=None):
 # --- INTERVIEW_ASK MODE: Run Friday 9am ---
 # --- Fetch analytics for last 20 tweets ---
 def fetch_tweet_analytics():
-    """Fetch last 20 tweets with public metrics via X API v2 pay-per-use."""
-    # Step 1: Get authenticated user ID
-    user_url = "https://api.twitter.com/2/users/me"
-    headers = {"Authorization": f"Bearer {X_BEARER_TOKEN}"}
-    # Bearer token alone won't work for /users/me - need OAuth 1.0a user context
-    # Use tweepy client which handles OAuth for us
-    tw = tweepy.Client(
-        consumer_key=X_API_KEY,
-        consumer_secret=X_API_SECRET,
-        access_token=X_ACCESS_TOKEN,
-        access_token_secret=X_ACCESS_SECRET
-    )
+    """Fetch last 20 tweets with public metrics via X API v2 using Bearer Token."""
+    tw = tweepy.Client(bearer_token=X_BEARER_TOKEN)
 
-    me = tw.get_me()
-    if not me or not me.data:
-        print("Could not fetch user ID for analytics.")
-        return []
-
-    user_id = me.data.id
-
-    # Step 2: Fetch last 20 tweets with public_metrics
+    # Fetch last 20 tweets with public_metrics
     response = tw.get_users_tweets(
-        id=user_id,
+        id=X_USER_ID,
         max_results=20,
         tweet_fields=["public_metrics", "created_at", "text"],
         exclude=["retweets", "replies"]
@@ -496,7 +480,7 @@ def fetch_tweet_analytics():
             "likes": m["like_count"],
             "retweets": m["retweet_count"],
             "replies": m["reply_count"],
-            "impressions": m["impression_count"],
+            "impressions": m.get("impression_count", 0),
         })
 
     return tweets
