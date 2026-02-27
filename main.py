@@ -584,9 +584,12 @@ def run_interview_ask():
     }
     save_state(state)
 
-    # Post analytics digest to the new issue
-    print("Generating analytics digest...")
-    post_analytics_digest(issue_number)
+    # Post analytics digest to the new issue (requires X API Basic tier)
+    try:
+        print("Generating analytics digest...")
+        post_analytics_digest(issue_number)
+    except Exception as e:
+        print(f"Analytics skipped (requires X API Basic tier): {e}")
 
     print("Done. Check your GitHub Issues.")
 
