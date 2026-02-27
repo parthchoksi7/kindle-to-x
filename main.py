@@ -42,9 +42,15 @@ Who they are:
 - Voice: direct, specific, slightly dry, no fluff. Talks like a person not a content creator.
 """
 
-def get_voice_context():
+def get_voice_context(state=None):
+    examples = list(VOICE_EXAMPLES)
+    # Merge in any high-rated examples saved in state
+    if state:
+        for ex in state.get("voice_examples", []):
+            if ex not in examples:
+                examples.append(ex)
     examples_text = ""
-    for ex in VOICE_EXAMPLES:
+    for ex in examples:
         examples_text += f"Raw answer: \"{ex['a']}\"\nTweet written from it: \"{ex['tweet']}\"\n\n"
     return f"""Here are real examples of how this person talks and how their answers get turned into tweets.
 Use these to match their voice - direct, specific, no fluff, slightly dry:
@@ -178,9 +184,11 @@ def generate_posts(highlights, book_title, book_author, is_continuing_thread):
     highlights_text = "\n".join(f"- {h}" for h in highlights)
 
     if is_continuing_thread:
-        intro_rule = "This is a continuation of an existing thread about this book. Do NOT introduce the book again. Jump straight into the next insights."
+        intro_rule = "This is a continuation of an existing thread about this book. Do NOT introduce the book again. Jump straight into the next insights. Tweet 1 must lead with the most counterintuitive or surprising idea from the highlights."
     else:
-        intro_rule = "The first tweet must introduce the book: include the full title and author, and set up what the thread is about."
+        intro_rule = """Tweet 1 must lead with the single most counterintuitive or surprising idea from the highlights - that is the hook.
+Weave in the book title and author naturally within tweet 1 (e.g. "Thiel argues in Zero to One that..." or "In Zero to One, Thiel makes a point that...") - do NOT open with "I am reading..." or "Here are lessons from...".
+The reader should be hooked by the idea first, then realize what book it came from."""
 
     prompt = f"""You are a book insight assistant helping a product manager share learnings on X (Twitter).
 
@@ -188,13 +196,13 @@ Based on these Kindle highlights from '{book_title}' by {book_author}, write a T
 
 Rules:
 - {intro_rule}
-- Each insight tweet must do two things:
-    1. Ground the insight in the original book context - reference the specific idea, character, situation, or concept from the book that the highlight refers to, so that readers who have read the book immediately recognize it
+- Each tweet must do two things:
+    1. Ground the insight in the original book context - reference the specific idea, character, situation, or concept from the book
     2. Connect that reference to a practical product management lesson - think prioritization, user research, team dynamics, strategy, decision making, stakeholder management, or building products
 - The connection between the book reference and the PM lesson should feel natural, not forced
 - Each tweet must be max 280 characters
 - Plain text only - no emojis, no icons, no em dashes
-- End the last tweet with a summary or call to action for PMs reading
+- Tweet 3 ends with a punchy takeaway or open question for PMs - not a generic call to action
 
 Return only the tweets, numbered 1. 2. 3.
 
@@ -216,11 +224,18 @@ def generate_interview_questions():
     client = anthropic.Anthropic(api_key=ANTHROPIC_API_KEY)
     voice_context = get_voice_context()
 
+    # Load recent question history to avoid repeats
+    state = load_state()
+    recent_questions = state.get("question_history", [])[-8:]
+    history_text = ""
+    if recent_questions:
+        history_text = "Questions asked in recent weeks (DO NOT repeat these angles):\n" + "\n".join(f"- {q}" for q in recent_questions) + "\n\n"
+
     prompt = f"""You help a PM who runs @marginnotespm on X build their brand through short, specific posts.
 
 {voice_context}
 
-Generate 2 questions to ask them this week to draw out something worth posting.
+{history_text}Generate 2 questions to ask them this week to draw out something worth posting.
 
 The questions that work best are ones that:
 - Ask about a specific recent moment, not a general opinion
@@ -437,6 +452,111 @@ def post_single_tweet(tweet_text, reply_to_id=None):
     return response.data["id"]
 
 # --- INTERVIEW_ASK MODE: Run Friday 9am ---
+# --- Fetch analytics for last 20 tweets ---
+def fetch_tweet_analytics():
+    """Fetch last 20 tweets with public metrics via X API v2 pay-per-use."""
+    # Step 1: Get authenticated user ID
+    user_url = "https://api.twitter.com/2/users/me"
+    headers = {"Authorization": f"Bearer {X_BEARER_TOKEN}"}
+    # Bearer token alone won't work for /users/me - need OAuth 1.0a user context
+    # Use tweepy client which handles OAuth for us
+    tw = tweepy.Client(
+        consumer_key=X_API_KEY,
+        consumer_secret=X_API_SECRET,
+        access_token=X_ACCESS_TOKEN,
+        access_token_secret=X_ACCESS_SECRET
+    )
+
+    me = tw.get_me()
+    if not me or not me.data:
+        print("Could not fetch user ID for analytics.")
+        return []
+
+    user_id = me.data.id
+
+    # Step 2: Fetch last 20 tweets with public_metrics
+    response = tw.get_users_tweets(
+        id=user_id,
+        max_results=20,
+        tweet_fields=["public_metrics", "created_at", "text"],
+        exclude=["retweets", "replies"]
+    )
+
+    if not response.data:
+        print("No tweets found for analytics.")
+        return []
+
+    tweets = []
+    for t in response.data:
+        m = t.public_metrics
+        tweets.append({
+            "id": t.id,
+            "text": t.text[:100] + "..." if len(t.text) > 100 else t.text,
+            "created_at": str(t.created_at),
+            "likes": m["like_count"],
+            "retweets": m["retweet_count"],
+            "replies": m["reply_count"],
+            "impressions": m["impression_count"],
+        })
+
+    return tweets
+
+# --- Generate analytics digest and post to GitHub Issue ---
+def post_analytics_digest(issue_number):
+    print("Fetching tweet analytics...")
+    tweets = fetch_tweet_analytics()
+
+    if not tweets:
+        print("No analytics data available. Skipping digest.")
+        return
+
+    client = anthropic.Anthropic(api_key=ANTHROPIC_API_KEY)
+
+    tweets_text = ""
+    for t in tweets:
+        line = f"- {t['text']} | likes: {t['likes']} | retweets: {t['retweets']} | replies: {t['replies']} | impressions: {t['impressions']}"
+        tweets_text += line + "\n"
+
+    prompt = f"""You are analyzing tweet performance for @marginnotespm, an anonymous PM account focused on books and product management.
+
+Here are their last 20 tweets with metrics:
+{tweets_text}
+
+Write a brief analytics digest with:
+1. Top 3 tweets by engagement (likes + retweets + replies combined)
+2. What patterns you notice - which topics, formats, or angles performed best
+3. One clear recommendation for what to post more of based on the data
+
+Keep it concise and actionable. Plain text, no emojis."""
+
+    response = client.messages.create(
+        model="claude-sonnet-4-6",
+        max_tokens=512,
+        messages=[{"role": "user", "content": prompt}]
+    )
+
+    digest = response.content[0].text.strip()
+
+    # Build full metrics table
+    metrics_table = "| Tweet | Likes | RTs | Replies | Impressions |\n|---|---|---|---|---|\n"
+    for t in tweets:
+        short = t["text"][:60].replace("|", "-")
+        metrics_table += f"| {short}... | {t['likes']} | {t['retweets']} | {t['replies']} | {t['impressions']} |\n"
+
+    comment_body = f"""## Weekly analytics digest
+
+{digest}
+
+---
+
+### Raw numbers (last 20 tweets)
+
+{metrics_table}"""
+
+    url = f"https://api.github.com/repos/{GITHUB_REPO}/issues/{issue_number}/comments"
+    requests.post(url, headers=github_headers(), json={"body": comment_body})
+    print("Analytics digest posted to GitHub Issue.")
+
 def run_interview_ask():
     print("Mode: INTERVIEW_ASK")
 
@@ -467,6 +587,11 @@ def run_interview_ask():
     )
     print(f"Created issue #{issue_number}")
 
+    # Save questions to history
+    question_history = state.get("question_history", [])
+    question_history.extend(questions)
+    state["question_history"] = question_history[-16:]  # Keep last 16 (8 weeks)
+
     state["interview"] = {
         "issue_number": issue_number,
         "questions": questions,
@@ -474,6 +599,11 @@ def run_interview_ask():
         "pending_tweets": []
     }
     save_state(state)
+
+    # Post analytics digest to the new issue
+    print("Generating analytics digest...")
+    post_analytics_digest(issue_number)
+
     print("Done. Check your GitHub Issues.")
 
 # --- GENERATE MODE: Run Sunday 9am ---
@@ -535,8 +665,37 @@ def run_generate():
         comments = get_issue_comments(issue_number)
         user_comments = [c for c in comments if c.get("user", {}).get("type") != "Bot"]
 
-        if user_comments:
-            answer_text = user_comments[-1]["body"].strip()
+        # Check for rating comment and update voice examples in state
+        rating_comments = [c for c in user_comments if "RATING:" in c.get("body", "")]
+        if rating_comments:
+            rating_body = rating_comments[-1]["body"]
+            rating_match = re.search(r"RATING:\s*([123])", rating_body)
+            if rating_match:
+                rating = int(rating_match.group(1))
+                notes_match = re.search(r"NOTES:\s*(.+)", rating_body)
+                notes = notes_match.group(1).strip() if notes_match else ""
+                print(f"Found rating: {rating}/3. Notes: {notes}")
+
+                # Store rating against last week's interview tweets
+                rated_tweets = interview.get("pending_tweets", [])
+                interview["last_rating"] = {"rating": rating, "notes": notes, "tweets": rated_tweets}
+
+                # If rated 3, add the answer to VOICE_EXAMPLES in state for future use
+                if rating == 3:
+                    saved_examples = state.get("voice_examples", [])
+                    last_answer = interview.get("last_answer", "")
+                    last_tweet = rated_tweets[0]["text"] if rated_tweets else ""
+                    if last_answer and last_tweet:
+                        saved_examples.append({"a": last_answer, "tweet": last_tweet})
+                        state["voice_examples"] = saved_examples[-5:]  # Keep best 5
+                        print("High-rated answer saved to voice examples.")
+
+        # Filter out rating comments to find actual answers
+        answer_comments = [c for c in user_comments if "RATING:" not in c.get("body", "")]
+
+        if answer_comments:
+            answer_text = answer_comments[-1]["body"].strip()
+            interview["last_answer"] = answer_text  # Save for potential voice example
             print(f"\nFound interview answer ({len(answer_text)} chars)")
 
             interview_tweets = generate_interview_tweets(questions, answer_text)
@@ -653,6 +812,28 @@ def run_post_interview():
         interview["pending_tweets"] = pending
         state["interview"] = interview
         save_state(state)
+
+        # After last interview tweet posts, add rating request to GitHub Issue
+        remaining = [t for t in pending if not t.get("posted")]
+        if not remaining:
+            issue_number = interview.get("issue_number")
+            if issue_number:
+                rating_body = """## How were this week's tweets?
+
+The 2 interview tweets just posted. Rate them so the writing improves over time:
+
+**Reply with a single comment in this format:**
+RATING: [1, 2, or 3]
+NOTES: [optional - what worked or didn't]
+
+1 = Missed the mark
+2 = Good enough
+3 = Nailed it
+
+*Your rating gets used to calibrate future tweets to sound more like you.*"""
+                url = f"https://api.github.com/repos/{GITHUB_REPO}/issues/{issue_number}/comments"
+                requests.post(url, headers=github_headers(), json={"body": rating_body})
+                print("Rating request posted to GitHub Issue.")
 
     except Exception as e:
         print(f"Failed to post interview tweet: {e}")
