@@ -15,6 +15,7 @@ X_ACCESS_TOKEN = os.environ["X_ACCESS_TOKEN"]
 X_ACCESS_SECRET = os.environ["X_ACCESS_SECRET"]
 GITHUB_TOKEN = os.environ["GITHUB_TOKEN"]
 GITHUB_REPO = os.environ["GITHUB_REPO"]  # e.g. "username/repo"
+X_BEARER_TOKEN = os.environ["X_BEARER_TOKEN"]
 MODE = os.environ.get("MODE", "generate")
 
 STATE_FILE = "state.json"
@@ -280,33 +281,90 @@ Highlights:
 
     return clean_post(response.content[0].text.strip())
 
-# --- Generate reply suggestions for PM/books tweets ---
+# --- Accounts to monitor for reply opportunities ---
+REPLY_ACCOUNTS = [
+    "shreyas",        # Ex-Stripe PM, human side of product
+    "lennysan",       # Ex-Airbnb, huge PM following
+    "ttorres",        # Teresa Torres, continuous discovery
+    "sahilbloom",     # Writer, books + life lessons
+    "johncutlefish",  # John Cutler, contrarian PM takes
+    "jasonfried",     # Basecamp, anti-conventional wisdom
+    "nirandfar",      # Nir Eyal, books + product overlap
+]
+
+# --- Fetch recent tweets from a user via X API ---
+def get_user_tweets(username, max_results=3):
+    # First get user ID
+    user_url = f"https://api.twitter.com/2/users/by/username/{username}"
+    headers = {"Authorization": f"Bearer {X_BEARER_TOKEN}"}
+    user_resp = requests.get(user_url, headers=headers)
+    if user_resp.status_code != 200:
+        print(f"Could not fetch user {username}: {user_resp.status_code}")
+        return []
+    user_id = user_resp.json().get("data", {}).get("id")
+    if not user_id:
+        return []
+
+    # Then get their recent tweets
+    tweets_url = f"https://api.twitter.com/2/users/{user_id}/tweets"
+    params = {
+        "max_results": max_results,
+        "tweet.fields": "public_metrics,created_at",
+        "exclude": "retweets,replies"
+    }
+    tweets_resp = requests.get(tweets_url, headers=headers, params=params)
+    if tweets_resp.status_code != 200:
+        print(f"Could not fetch tweets for {username}: {tweets_resp.status_code}")
+        return []
+
+    tweets = tweets_resp.json().get("data", [])
+    return [{"handle": username, "text": t["text"], "id": t["id"],
+             "likes": t.get("public_metrics", {}).get("like_count", 0)} for t in tweets]
+
+# --- Generate reply suggestions from real tweets ---
 def generate_reply_suggestions(issue_number):
     client = anthropic.Anthropic(api_key=ANTHROPIC_API_KEY)
     voice_context = get_voice_context()
+
+    # Fetch real tweets from tracked accounts
+    all_tweets = []
+    for account in REPLY_ACCOUNTS:
+        tweets = get_user_tweets(account, max_results=3)
+        all_tweets.extend(tweets)
+
+    if not all_tweets:
+        print("Could not fetch any tweets. Skipping reply suggestions.")
+        return
+
+    # Sort by likes and take top 6 as candidates
+    all_tweets.sort(key=lambda t: t["likes"], reverse=True)
+    candidates = all_tweets[:6]
+    candidates_text = "\n\n".join(
+        f"@{t['handle']}: {t['text']} (likes: {t['likes']})"
+        for t in candidates
+    )
 
     prompt = f"""You help a PM who runs @marginnotespm on X grow their following by replying to relevant tweets.
 
 {voice_context}
 
-Generate 3 realistic example tweets from other accounts in the product management or books/reading space that this person would have a genuinely interesting reply to. Then write the reply they should post.
+Here are recent tweets from PM and books accounts they follow. Pick the 3 best ones to reply to and write the reply.
 
-For each:
-- Make the original tweet feel real and specific (attribute it to a generic handle like @somePM or @productlead)
-- The reply should add a real perspective, a pushback, or a specific example - not just agreement
-- Reply must be under 240 characters
-- Plain text, no emojis, no em dashes
-- Voice should match their style: direct, specific, slightly dry
+Choose tweets where this person would have something specific and genuine to say - a pushback, a real example from their experience, or an unexpected angle.
 
-Format each as:
-TWEET: [the tweet they'd reply to]
-REPLY: [their reply]
+Tweets to choose from:
+{candidates_text}
 
-Generate 3 of these."""
+For each of the 3 you pick, format as:
+ACCOUNT: @handle
+TWEET: [the tweet text]
+REPLY: [their reply - under 240 chars, plain text, direct, slightly dry, no emojis]
+
+Pick 3."""
 
     response = client.messages.create(
         model="claude-sonnet-4-6",
-        max_tokens=600,
+        max_tokens=800,
         messages=[{"role": "user", "content": prompt}]
     )
 
@@ -314,12 +372,12 @@ Generate 3 of these."""
 
     comment_body = f"""## Reply suggestions for this week
 
-3 tweets worth replying to in the PM/books space. Copy, tweak, post manually - takes 5 min.
+3 real tweets from accounts you follow - worth replying to. Copy the reply, tweak if needed, post manually. Takes 5 min.
 
 {raw}
 
 ---
-*Replying to other accounts is the fastest way to grow at your stage. Even 2-3 replies a week compounds.*"""
+*Replying to accounts your target audience follows is the fastest way to grow at your stage.*"""
 
     url = f"https://api.github.com/repos/{GITHUB_REPO}/issues/{issue_number}/comments"
     requests.post(url, headers=github_headers(), json={"body": comment_body})
