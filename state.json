@@ -4,15 +4,9 @@
   "pending_tweets": [],
   "interview": {
     "issue_number": 5,
-    "questions": [
-      "What's the last thing your daughter did that made you think \"yeah, I literally do that at work too\"?",
-      "Since you've been off training, what's the thought that keeps showing up that you'd normally just sweat out and forget?"
-    ],
-    "sent_at": "2026-02-28T00:56:38.155189+00:00",
+    "questions": [],
+    "sent_at": null,
     "pending_tweets": []
   },
-  "question_history": [
-    "What's the last thing your daughter did that made you think \"yeah, I literally do that at work too\"?",
-    "Since you've been off training, what's the thought that keeps showing up that you'd normally just sweat out and forget?"
-  ]
+  "question_history": []
 }
