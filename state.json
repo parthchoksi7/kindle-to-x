@@ -3,10 +3,16 @@
   "book_threads": {},
   "pending_tweets": [],
   "interview": {
-    "issue_number": 5,
-    "questions": [],
-    "sent_at": null,
+    "issue_number": 6,
+    "questions": [
+      "What's been taking up the most mental space this week - and have you actually dealt with it or just been carrying it around?",
+      "When's the last time your daughter did something and you thought \"I'd never get away with that at work\" - but maybe you should?"
+    ],
+    "sent_at": "2026-02-28T01:00:03.968338+00:00",
     "pending_tweets": []
   },
-  "question_history": []
+  "question_history": [
+    "What's been taking up the most mental space this week - and have you actually dealt with it or just been carrying it around?",
+    "When's the last time your daughter did something and you thought \"I'd never get away with that at work\" - but maybe you should?"
+  ]
 }
