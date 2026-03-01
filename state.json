@@ -1,7 +1,52 @@
 {
-  "seen_highlights": [],
+  "seen_highlights": [
+    "\u2018Sometime look at a novice workman or a bad workman and compare his expression with that of a craftsman whose work you know is excellent and you\u2019ll see the difference. The craftsman isn\u2019t ever following a single line of instruction. He\u2019s making decisions as he goes along. For that reason he\u2019ll be absorbed and attentive to what he\u2019s doing even though he doesn\u2019t deliberately contrive this. His motions and the machine are in a kind of harmony. He isn\u2019t following any set of written instructions because the nature of the material at hand determines his thoughts and motions, which simultaneously change the nature of the material at hand. The material and his thoughts are changing together in a progression of changes until his mind\u2019s at rest at the same time the material\u2019s right.\u2019 \u2018Sounds like art,\u2019 the instructor says. \u2018Well, it is art,\u2019 I say. \u2018This divorce of art from technology is completely unnatural. It\u2019s just that it\u2019s gone on so long you have to be an archeologist to find out where the two separated. Rotisserie assembly is actually a long-lost branch of sculpture, so divorced from its roots by centuries of intellectual wrong turns that just to associate the two sounds ludicrous.\u2019",
+    "The real University is not a material object. It is not a group of buildings that can be defended by police. He explained that when a college lost its accreditation, nobody came and shut down the school. There were no legal penalties, no fines, no jail sentences. Classes did not stop. Everything went on just as before. Students got the same education they would if the school didn\u2019t lose its accreditation. All that would happen, Phaedrus said, would simply be an official recognition of a condition that already existed. It would be similar to excommunication. What would happen is that the real University, which no legislature can dictate to and which can never be identified by any location of bricks or boards or glass, would simply declare that this place was no longer \u2018holy ground.\u2019 The real University would vanish from it, and all that would be left was the bricks and the books and the material manifestation.",
+    "The real University is a state of mind. It is that great heritage of rational thought that has been brought down to us through the centuries and which does not exist at any specific location. It\u2019s a state of mind which is regenerated throughout the centuries by a body of people who traditionally carry the title of professor, but even that title is not part of the real University. The real University is nothing less than the continuing body of reason itself.",
+    "The logical statements entered into the notebook are broken down into six categories: (1) statement of the problem, (2) hypotheses as to the cause of the problem, (3) experiments designed to test each hypothesis, (4) predicted results of the experiments, (5) observed results of the experiments and (6) conclusions from the results of the experiments.",
+    "the only real learning results from hang-ups, where instead of expanding the branches of what you already know, you have to stop and drift laterally for a while until you come across something that allows you to expand the roots of what you already know.",
+    "\u2018Peace of mind isn\u2019t at all superficial, really,\u2019 I expound. \u2018It\u2019s the whole thing. That which produces it is good maintenance; that which disturbs it is poor maintenance. What we call workability of the machine is just an objectification of this peace of mind. The ultimate test\u2019s always your own serenity. If you don\u2019t have this when you start and maintain it while you\u2019re working you\u2019re likely to build your personal problems right into the machine itself.\u2019 They just look at me, thinking about this. \u2018It\u2019s an unconventional concept,\u2019 I say, \u2018but conventional reason bears it out. The material object of observation, the bicycle or rotisserie, can\u2019t be right or wrong. Molecules are molecules. They don\u2019t have any ethical codes to follow except those people give them. The test of the machine is the satisfaction it gives you. There isn\u2019t any other test. If the machine produces tranquillity it\u2019s right. If it disturbs you it\u2019s wrong until either the machine or your mind is changed. The test of the machine\u2019s always your own mind. There isn\u2019t any other test.\u2019 DeWeese asks, \u2018What if the machine is wrong and I feel peaceful about it?\u2019 Laughter. I reply, \u2018That\u2019s self-contradictory. If you really don\u2019t care you aren\u2019t going to know it\u2019s wrong. The thought\u2019ll never occur to you. The act of pronouncing it wrong\u2019s a form of caring.\u2019",
+    "You are never dedicated to something you have complete confidence in. No one is fanatically shouting that the sun is going to rise tomorrow. They know it\u2019s going to rise tomorrow. When people are fanatically dedicated to political or religious faiths or any other kinds of dogmas or goals, it\u2019s always because these dogmas or goals are in doubt."
+  ],
   "book_threads": {},
-  "pending_tweets": [],
+  "pending_tweets": [
+    {
+      "order": 0,
+      "text": "Fanatical dedication to your roadmap is actually a sign of doubt, not conviction. Pirsig shows in Zen and the Art of Motorcycle Maintenance that nobody shouts about the sunrise. If your team is over-defending a feature, that's a signal worth investigating.",
+      "posted": false,
+      "tweet_id": null,
+      "book_id": "58509025",
+      "book_title": "Zen and the Art of Motorcycle Maintenance",
+      "type": "book"
+    },
+    {
+      "order": 1,
+      "text": "Pirsig describes the craftsman as someone who never follows a single instruction line. His thoughts and the material change together. For PMs, the best discovery work looks the same: the user's context should reshape your thinking in real time, not confirm a pre-written script.",
+      "posted": false,
+      "tweet_id": null,
+      "book_id": "58509025",
+      "book_title": "Zen and the Art of Motorcycle Maintenance",
+      "type": "book"
+    },
+    {
+      "order": 2,
+      "text": "Pirsig's mechanic tests a machine by one measure: does it produce tranquility or disturbance? Your product has the same test. Metrics can lie. Retention can flatter. But if your support queue, your NPS comments, and your own gut all feel uneasy, the machine is wrong. Are you listening?",
+      "posted": false,
+      "tweet_id": null,
+      "book_id": "58509025",
+      "book_title": "Zen and the Art of Motorcycle Maintenance",
+      "type": "book"
+    },
+    {
+      "order": 3,
+      "text": "Real learning happens when you hit a wall. Not expanding branches of what you know, but drifting sideways until you find something that deepens the roots. Most education optimizes for the wrong kind of growth.",
+      "posted": false,
+      "tweet_id": null,
+      "book_id": "58509025",
+      "book_title": "Zen and the Art of Motorcycle Maintenance",
+      "type": "standalone"
+    }
+  ],
   "interview": {
     "issue_number": 6,
     "questions": [
@@ -9,7 +54,23 @@
       "When's the last time your daughter did something and you thought \"I'd never get away with that at work\" - but maybe you should?"
     ],
     "sent_at": "2026-02-28T01:00:03.968338+00:00",
-    "pending_tweets": []
+    "pending_tweets": [
+      {
+        "order": 0,
+        "text": "This week: wife injured, daughter sick, working from home the whole time. Not much PM thinking happened. Sometimes the thing taking up the most mental space has nothing to do with work.",
+        "posted": false,
+        "tweet_id": null,
+        "type": "interview"
+      },
+      {
+        "order": 1,
+        "text": "My daughter started singing out loud in the middle of Target. Just felt like it, so she did. I'm the person in a 10-person meeting afraid to ask a question. Not sure what that says about either of us.",
+        "posted": false,
+        "tweet_id": null,
+        "type": "interview"
+      }
+    ],
+    "last_answer": "#1 This week has been slightly different - my daughter was sick and I had to work from home almost the entire week. And my wife also had an injury. The health of my family has been on top of my mind this week.\n\n#2 I'm a very reserved person. I'm kinda scared when I am in a meeting with a lot of people and don't ask questions. But my daughter freely starts dancing or singing whenever she feels like. The other day when we were in Target shopping, she started singing a song. And I loved it! I wish I could do what she does."
   },
   "question_history": [
     "What's been taking up the most mental space this week - and have you actually dealt with it or just been carrying it around?",
