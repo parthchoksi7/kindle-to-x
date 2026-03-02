@@ -12,7 +12,7 @@
     "58509025": {
       "title": "Zen and the Art of Motorcycle Maintenance",
       "first_tweet_id": "2028528781741469714",
-      "last_tweet_id": "2028528781741469714"
+      "last_tweet_id": "2028568085695984096"
     }
   },
   "pending_tweets": [
@@ -28,8 +28,8 @@
     {
       "order": 1,
       "text": "Pirsig describes the craftsman as someone who never follows a single instruction line. His thoughts and the material change together. For PMs, the best discovery work looks the same: the user's context should reshape your thinking in real time, not confirm a pre-written script.",
-      "posted": false,
-      "tweet_id": null,
+      "posted": true,
+      "tweet_id": "2028568085695984096",
       "book_id": "58509025",
       "book_title": "Zen and the Art of Motorcycle Maintenance",
       "type": "book"
