@@ -71,8 +71,8 @@
       {
         "order": 1,
         "text": "My daughter started singing out loud in the middle of Target. Just felt like it, so she did. I'm the person in a 10-person meeting afraid to ask a question. Not sure what that says about either of us.",
-        "posted": false,
-        "tweet_id": null,
+        "posted": true,
+        "tweet_id": "2029292925117440211",
         "type": "interview"
       }
     ],
