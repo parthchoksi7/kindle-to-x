@@ -64,8 +64,8 @@
       {
         "order": 0,
         "text": "This week: wife injured, daughter sick, working from home the whole time. Not much PM thinking happened. Sometimes the thing taking up the most mental space has nothing to do with work.",
-        "posted": false,
-        "tweet_id": null,
+        "posted": true,
+        "tweet_id": "2029249483746222093",
         "type": "interview"
       },
       {
