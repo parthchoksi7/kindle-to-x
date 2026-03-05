@@ -46,8 +46,8 @@
     {
       "order": 3,
       "text": "Real learning happens when you hit a wall. Not expanding branches of what you know, but drifting sideways until you find something that deepens the roots. Most education optimizes for the wrong kind of growth.",
-      "posted": false,
-      "tweet_id": null,
+      "posted": true,
+      "tweet_id": "2029629920800858483",
       "book_id": "58509025",
       "book_title": "Zen and the Art of Motorcycle Maintenance",
       "type": "standalone"
