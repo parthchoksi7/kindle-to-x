@@ -54,32 +54,18 @@
     }
   ],
   "interview": {
-    "issue_number": 6,
+    "issue_number": 7,
     "questions": [
-      "What's been taking up the most mental space this week - and have you actually dealt with it or just been carrying it around?",
-      "When's the last time your daughter did something and you thought \"I'd never get away with that at work\" - but maybe you should?"
+      "What's the last thing you read that you immediately wanted to argue with?",
+      "Was there a moment this week where you caught yourself saying something to a stakeholder that you didn't actually believe?"
     ],
-    "sent_at": "2026-02-28T01:00:03.968338+00:00",
-    "pending_tweets": [
-      {
-        "order": 0,
-        "text": "This week: wife injured, daughter sick, working from home the whole time. Not much PM thinking happened. Sometimes the thing taking up the most mental space has nothing to do with work.",
-        "posted": true,
-        "tweet_id": "2029249483746222093",
-        "type": "interview"
-      },
-      {
-        "order": 1,
-        "text": "My daughter started singing out loud in the middle of Target. Just felt like it, so she did. I'm the person in a 10-person meeting afraid to ask a question. Not sure what that says about either of us.",
-        "posted": true,
-        "tweet_id": "2029292925117440211",
-        "type": "interview"
-      }
-    ],
-    "last_answer": "#1 This week has been slightly different - my daughter was sick and I had to work from home almost the entire week. And my wife also had an injury. The health of my family has been on top of my mind this week.\n\n#2 I'm a very reserved person. I'm kinda scared when I am in a meeting with a lot of people and don't ask questions. But my daughter freely starts dancing or singing whenever she feels like. The other day when we were in Target shopping, she started singing a song. And I loved it! I wish I could do what she does."
+    "sent_at": "2026-03-06T17:33:48.376119+00:00",
+    "pending_tweets": []
   },
   "question_history": [
     "What's been taking up the most mental space this week - and have you actually dealt with it or just been carrying it around?",
-    "When's the last time your daughter did something and you thought \"I'd never get away with that at work\" - but maybe you should?"
+    "When's the last time your daughter did something and you thought \"I'd never get away with that at work\" - but maybe you should?",
+    "What's the last thing you read that you immediately wanted to argue with?",
+    "Was there a moment this week where you caught yourself saying something to a stakeholder that you didn't actually believe?"
   ]
 }
