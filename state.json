@@ -15,7 +15,7 @@
     "58509025": {
       "title": "Zen and the Art of Motorcycle Maintenance",
       "first_tweet_id": "2028528781741469714",
-      "last_tweet_id": "2031065381625016594"
+      "last_tweet_id": "2031104104416551134"
     }
   },
   "pending_tweets": [
@@ -31,8 +31,8 @@
     {
       "order": 1,
       "text": "\"For every fact there is an infinity of hypotheses. The more you look the more you see.\" Pirsig uses this to challenge lazy thinking. In discovery, one data point isn't a signal. The PM who stops looking after the first insight is the most dangerous person in the room.",
-      "posted": false,
-      "tweet_id": null,
+      "posted": true,
+      "tweet_id": "2031104104416551134",
       "book_id": "58509025",
       "book_title": "Zen and the Art of Motorcycle Maintenance",
       "type": "book"
