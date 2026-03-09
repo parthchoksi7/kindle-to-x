@@ -15,15 +15,15 @@
     "58509025": {
       "title": "Zen and the Art of Motorcycle Maintenance",
       "first_tweet_id": "2028528781741469714",
-      "last_tweet_id": "2028568085695984096"
+      "last_tweet_id": "2031065381625016594"
     }
   },
   "pending_tweets": [
     {
       "order": 0,
       "text": "Pirsig's student couldn't write about Bozeman because she was trying to recall things worth repeating, not observe freshly. One brick unlocked everything. PMs do this too - we recycle frameworks instead of actually looking at our users.",
-      "posted": false,
-      "tweet_id": null,
+      "posted": true,
+      "tweet_id": "2031065381625016594",
       "book_id": "58509025",
       "book_title": "Zen and the Art of Motorcycle Maintenance",
       "type": "book"
