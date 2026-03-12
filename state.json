@@ -49,8 +49,8 @@
     {
       "order": 3,
       "text": "Writer's block isn't about having nothing to say. It's about trying to repeat things you've already heard. Narrow down to one brick and you're forced to see freshly for yourself.",
-      "posted": false,
-      "tweet_id": null,
+      "posted": true,
+      "tweet_id": "2032151699561783676",
       "book_id": "58509025",
       "book_title": "Zen and the Art of Motorcycle Maintenance",
       "type": "standalone"
