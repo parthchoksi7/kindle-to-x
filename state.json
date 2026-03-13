@@ -57,18 +57,20 @@
     }
   ],
   "interview": {
-    "issue_number": 7,
+    "issue_number": 8,
     "questions": [
-      "What's the last thing you read that you immediately wanted to argue with?",
-      "Was there a moment this week where you caught yourself saying something to a stakeholder that you didn't actually believe?"
+      "What's a problem you've been quietly solving in your head this week that hasn't made it into a single meeting or doc yet?",
+      "Since you've been off training, what's the thing that's been filling that thinking time - and is it actually useful or just noise?"
     ],
-    "sent_at": "2026-03-06T17:33:48.376119+00:00",
+    "sent_at": "2026-03-13T17:33:29.100080+00:00",
     "pending_tweets": []
   },
   "question_history": [
     "What's been taking up the most mental space this week - and have you actually dealt with it or just been carrying it around?",
     "When's the last time your daughter did something and you thought \"I'd never get away with that at work\" - but maybe you should?",
     "What's the last thing you read that you immediately wanted to argue with?",
-    "Was there a moment this week where you caught yourself saying something to a stakeholder that you didn't actually believe?"
+    "Was there a moment this week where you caught yourself saying something to a stakeholder that you didn't actually believe?",
+    "What's a problem you've been quietly solving in your head this week that hasn't made it into a single meeting or doc yet?",
+    "Since you've been off training, what's the thing that's been filling that thinking time - and is it actually useful or just noise?"
   ]
 }
