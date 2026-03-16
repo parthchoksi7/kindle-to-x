@@ -16,7 +16,7 @@
     "58509025": {
       "title": "Zen and the Art of Motorcycle Maintenance",
       "first_tweet_id": "2028528781741469714",
-      "last_tweet_id": "2033642108326649989"
+      "last_tweet_id": "2033689258264015326"
     }
   },
   "pending_tweets": [
@@ -41,8 +41,8 @@
     {
       "order": 2,
       "text": "If imitation is learned, it can be unlearned. What assumptions on your roadmap exist only because that's how the last team did it, and have you ever actually questioned whether they were right?",
-      "posted": false,
-      "tweet_id": null,
+      "posted": true,
+      "tweet_id": "2033689258264015326",
       "book_id": "58509025",
       "book_title": "Zen and the Art of Motorcycle Maintenance",
       "type": "book"
