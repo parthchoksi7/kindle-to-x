@@ -16,7 +16,7 @@
     "58509025": {
       "title": "Zen and the Art of Motorcycle Maintenance",
       "first_tweet_id": "2028528781741469714",
-      "last_tweet_id": "2033604816962793785"
+      "last_tweet_id": "2033642108326649989"
     }
   },
   "pending_tweets": [
@@ -32,8 +32,8 @@
     {
       "order": 1,
       "text": "Pirsig's rhetoric students couldn't write until they stopped mimicking what they thought a good essay looked like. The form was suffocating the thinking. PMs do this with frameworks. RICE, OKRs, PRDs become the work instead of tools that serve the work.",
-      "posted": false,
-      "tweet_id": null,
+      "posted": true,
+      "tweet_id": "2033642108326649989",
       "book_id": "58509025",
       "book_title": "Zen and the Art of Motorcycle Maintenance",
       "type": "book"
