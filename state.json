@@ -50,8 +50,8 @@
     {
       "order": 3,
       "text": "School teaches you to imitate before it teaches you to think. You arrive knowing how to learn. Then they spend years training that out of you.",
-      "posted": false,
-      "tweet_id": null,
+      "posted": true,
+      "tweet_id": "2034689482008485911",
       "book_id": "58509025",
       "book_title": "Zen and the Art of Motorcycle Maintenance",
       "type": "standalone"
