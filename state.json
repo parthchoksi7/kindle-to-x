@@ -53,8 +53,8 @@
     {
       "order": 3,
       "text": "The ego-climber and the selfless climber look identical from the outside. Same steps, same pace, same breaks. The difference is entirely internal. One is here. The other is forever somewhere up the trail, which means nowhere at all.",
-      "posted": false,
-      "tweet_id": null,
+      "posted": true,
+      "tweet_id": "2037227917696975343",
       "book_id": "58509025",
       "book_title": "Zen and the Art of Motorcycle Maintenance",
       "type": "standalone"
