@@ -68,8 +68,8 @@
     {
       "order": 3,
       "text": "Competition is a trap. Rivalry makes you copy what already worked instead of building what doesn't exist yet. The companies that win big aren't fighting for existing markets. They're making competition irrelevant.",
-      "posted": false,
-      "tweet_id": null,
+      "posted": true,
+      "tweet_id": "2039761926742310974",
       "book_id": "18020326",
       "book_title": "Zero to One",
       "type": "standalone"
