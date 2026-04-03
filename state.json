@@ -76,12 +76,12 @@
     }
   ],
   "interview": {
-    "issue_number": 10,
+    "issue_number": 11,
     "questions": [
-      "What's the last thing you read where you thought \"this is exactly right\" - and then realised you'd been doing the opposite?",
-      "Was there a moment this week where you felt like you were actually doing the job well - not the meeting version of the job, the real version?"
+      "Was there a moment this week where you held back from saying what you actually thought in a meeting - and what made you decide not to say it?",
+      "What's the last thing your daughter did that you found yourself genuinely impressed by, even though you know you're not supposed to admit that?"
     ],
-    "sent_at": "2026-03-27T17:48:47.654351+00:00",
+    "sent_at": "2026-04-03T17:33:30.256195+00:00",
     "pending_tweets": []
   },
   "question_history": [
@@ -94,6 +94,8 @@
     "What's the last decision you made this week that felt right in the moment but you've been quietly second-guessing since?",
     "Has your daughter said something recently that was completely unreasonable but also kind of hard to argue with?",
     "What's the last thing you read where you thought \"this is exactly right\" - and then realised you'd been doing the opposite?",
-    "Was there a moment this week where you felt like you were actually doing the job well - not the meeting version of the job, the real version?"
+    "Was there a moment this week where you felt like you were actually doing the job well - not the meeting version of the job, the real version?",
+    "Was there a moment this week where you held back from saying what you actually thought in a meeting - and what made you decide not to say it?",
+    "What's the last thing your daughter did that you found yourself genuinely impressed by, even though you know you're not supposed to admit that?"
   ]
 }
