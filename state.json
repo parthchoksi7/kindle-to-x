@@ -40,7 +40,7 @@
     "58261435": {
       "title": "Marc Andreessen: The Real AI Boom Hasn\u2019t Even Started Yet",
       "first_tweet_id": "2041212471390904376",
-      "last_tweet_id": "2041212471390904376"
+      "last_tweet_id": "2041252286312091830"
     }
   },
   "pending_tweets": [
@@ -56,8 +56,8 @@
     {
       "order": 1,
       "text": "Andreessen argues that the skills separating good from great will shift fast. Engineers, designers, and PMs who treat AI as a tool to delegate to will fall behind those who develop genuine intuition for what AI can and cannot do.",
-      "posted": false,
-      "tweet_id": null,
+      "posted": true,
+      "tweet_id": "2041252286312091830",
       "book_id": "58261435",
       "book_title": "Marc Andreessen: The Real AI Boom Hasn\u2019t Even Started Yet",
       "type": "book"
