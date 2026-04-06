@@ -36,14 +36,19 @@
       "title": "Zero to One",
       "first_tweet_id": "2038676792630718871",
       "last_tweet_id": "2038717184705188342"
+    },
+    "58261435": {
+      "title": "Marc Andreessen: The Real AI Boom Hasn\u2019t Even Started Yet",
+      "first_tweet_id": "2041212471390904376",
+      "last_tweet_id": "2041212471390904376"
     }
   },
   "pending_tweets": [
     {
       "order": 0,
       "text": "Marc Andreessen tells Lenny that we are not yet in the real AI boom. The explosion of value creation is still ahead. For PMs, that means the roadmaps you write today are practice runs for problems that do not yet exist.",
-      "posted": false,
-      "tweet_id": null,
+      "posted": true,
+      "tweet_id": "2041212471390904376",
       "book_id": "58261435",
       "book_title": "Marc Andreessen: The Real AI Boom Hasn\u2019t Even Started Yet",
       "type": "book"
