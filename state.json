@@ -74,8 +74,8 @@
     {
       "order": 3,
       "text": "The best PMs won't manage AI. They'll think with it. The ones clinging to process and coordination as their core value are already being replaced. The new moat is judgment.",
-      "posted": false,
-      "tweet_id": null,
+      "posted": true,
+      "tweet_id": "2042300907124138221",
       "book_id": "58261435",
       "book_title": "Marc Andreessen: The Real AI Boom Hasn\u2019t Even Started Yet",
       "type": "standalone"
