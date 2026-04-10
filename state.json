@@ -82,12 +82,12 @@
     }
   ],
   "interview": {
-    "issue_number": 11,
+    "issue_number": 12,
     "questions": [
-      "Was there a moment this week where you held back from saying what you actually thought in a meeting - and what made you decide not to say it?",
-      "What's the last thing your daughter did that you found yourself genuinely impressed by, even though you know you're not supposed to admit that?"
+      "What's the last thing you read that you thought was slightly wrong, but you couldn't quite articulate why yet?",
+      "Was there a moment this week where you caught yourself doing something as a PM that you'd have quietly judged someone else for doing?"
     ],
-    "sent_at": "2026-04-03T17:33:30.256195+00:00",
+    "sent_at": "2026-04-10T17:45:53.464864+00:00",
     "pending_tweets": []
   },
   "question_history": [
@@ -102,6 +102,8 @@
     "What's the last thing you read where you thought \"this is exactly right\" - and then realised you'd been doing the opposite?",
     "Was there a moment this week where you felt like you were actually doing the job well - not the meeting version of the job, the real version?",
     "Was there a moment this week where you held back from saying what you actually thought in a meeting - and what made you decide not to say it?",
-    "What's the last thing your daughter did that you found yourself genuinely impressed by, even though you know you're not supposed to admit that?"
+    "What's the last thing your daughter did that you found yourself genuinely impressed by, even though you know you're not supposed to admit that?",
+    "What's the last thing you read that you thought was slightly wrong, but you couldn't quite articulate why yet?",
+    "Was there a moment this week where you caught yourself doing something as a PM that you'd have quietly judged someone else for doing?"
   ]
 }
