@@ -53,7 +53,7 @@
     "57700941": {
       "title": "Zen and the Art of Motorcycle Maintenance",
       "first_tweet_id": "2043753009025560906",
-      "last_tweet_id": "2043753009025560906"
+      "last_tweet_id": "2043792609441611836"
     }
   },
   "pending_tweets": [
@@ -69,8 +69,8 @@
     {
       "order": 1,
       "text": "Pirsig splits thinkers into romantic and classical modes. Romantics see surfaces, classicists see underlying form. PMs need both: the romantic to feel user pain viscerally, the classical to trace it back to system failures worth fixing.",
-      "posted": false,
-      "tweet_id": null,
+      "posted": true,
+      "tweet_id": "2043792609441611836",
       "book_id": "57700941",
       "book_title": "Zen and the Art of Motorcycle Maintenance",
       "type": "book"
