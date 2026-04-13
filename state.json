@@ -49,14 +49,19 @@
       "title": "Marc Andreessen: The Real AI Boom Hasn\u2019t Even Started Yet",
       "first_tweet_id": "2041212471390904376",
       "last_tweet_id": "2041300814082261393"
+    },
+    "57700941": {
+      "title": "Zen and the Art of Motorcycle Maintenance",
+      "first_tweet_id": "2043753009025560906",
+      "last_tweet_id": "2043753009025560906"
     }
   },
   "pending_tweets": [
     {
       "order": 0,
       "text": "Most product teams mistake speed for care. Pirsig shows in Zen and the Art of Motorcycle Maintenance that hurrying something means you have stopped caring about it. If you are rushing a roadmap or sprint, ask what you are actually trying to escape.",
-      "posted": false,
-      "tweet_id": null,
+      "posted": true,
+      "tweet_id": "2043753009025560906",
       "book_id": "57700941",
       "book_title": "Zen and the Art of Motorcycle Maintenance",
       "type": "book"
