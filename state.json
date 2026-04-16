@@ -87,8 +87,8 @@
     {
       "order": 3,
       "text": "The truth knocks on the door and you say \"Go away, I'm looking for the truth.\" Most people aren't blocked by lack of information. They're blocked by a picture in their head of what the answer is supposed to look like.",
-      "posted": false,
-      "tweet_id": null,
+      "posted": true,
+      "tweet_id": "2044840129684984192",
       "book_id": "57700941",
       "book_title": "Zen and the Art of Motorcycle Maintenance",
       "type": "standalone"
