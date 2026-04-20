@@ -56,14 +56,19 @@
       "title": "Zen and the Art of Motorcycle Maintenance",
       "first_tweet_id": "2043753009025560906",
       "last_tweet_id": "2043839817134551305"
+    },
+    "57617279": {
+      "title": "10 Contrarian Leadership Truths Every Leader Needs to Hear | Matt MacInnis",
+      "first_tweet_id": "2046288113916338566",
+      "last_tweet_id": "2046288113916338566"
     }
   },
   "pending_tweets": [
     {
       "order": 0,
       "text": "Success teaches more than failure. MacInnis argues in 10 Contrarian Leadership Truths that joining a winning team during its high-growth phase accelerates learning faster than grinding through a struggling one. Context shapes capability more than resilience does.",
-      "posted": false,
-      "tweet_id": null,
+      "posted": true,
+      "tweet_id": "2046288113916338566",
       "book_id": "57617279",
       "book_title": "10 Contrarian Leadership Truths Every Leader Needs to Hear | Matt MacInnis",
       "type": "book"
