@@ -94,8 +94,8 @@
     {
       "order": 3,
       "text": "Failure doesn't teach you as much as you think. Being on a winning team during a high-growth phase is more informative than any struggle. Success shows you what right looks like. Failure just shows you what went wrong.",
-      "posted": false,
-      "tweet_id": null,
+      "posted": true,
+      "tweet_id": "2047376278060232931",
       "book_id": "57617279",
       "book_title": "10 Contrarian Leadership Truths Every Leader Needs to Hear | Matt MacInnis",
       "type": "standalone"
