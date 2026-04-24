@@ -102,17 +102,15 @@
     }
   ],
   "interview": {
-    "issue_number": 13,
+    "issue_number": 14,
     "questions": [
-      "What's been sitting in the back of your head during the reading streak - the work problem you keep returning to even when you're trying not to think about work?",
-      "Was there a moment recently where you watched someone else run a meeting or make a call and thought \"I do that too\" - and you weren't sure how you felt about it?"
+      "Was there a moment this week where you gave someone feedback and immediately wondered if you'd been too soft or too blunt - and what made you second-guess it?",
+      "What's the last thing you read during the training break that you'd have probably skimmed past if you'd been training - like the rest actually let it land differently?"
     ],
-    "sent_at": "2026-04-17T17:48:01.237822+00:00",
+    "sent_at": "2026-04-24T17:49:33.112323+00:00",
     "pending_tweets": []
   },
   "question_history": [
-    "What's been taking up the most mental space this week - and have you actually dealt with it or just been carrying it around?",
-    "When's the last time your daughter did something and you thought \"I'd never get away with that at work\" - but maybe you should?",
     "What's the last thing you read that you immediately wanted to argue with?",
     "Was there a moment this week where you caught yourself saying something to a stakeholder that you didn't actually believe?",
     "What's a problem you've been quietly solving in your head this week that hasn't made it into a single meeting or doc yet?",
@@ -126,6 +124,8 @@
     "What's the last thing you read that you thought was slightly wrong, but you couldn't quite articulate why yet?",
     "Was there a moment this week where you caught yourself doing something as a PM that you'd have quietly judged someone else for doing?",
     "What's been sitting in the back of your head during the reading streak - the work problem you keep returning to even when you're trying not to think about work?",
-    "Was there a moment recently where you watched someone else run a meeting or make a call and thought \"I do that too\" - and you weren't sure how you felt about it?"
+    "Was there a moment recently where you watched someone else run a meeting or make a call and thought \"I do that too\" - and you weren't sure how you felt about it?",
+    "Was there a moment this week where you gave someone feedback and immediately wondered if you'd been too soft or too blunt - and what made you second-guess it?",
+    "What's the last thing you read during the training break that you'd have probably skimmed past if you'd been training - like the rest actually let it land differently?"
   ]
 }
