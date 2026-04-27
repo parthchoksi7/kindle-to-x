@@ -63,14 +63,19 @@
       "title": "10 Contrarian Leadership Truths Every Leader Needs to Hear | Matt MacInnis",
       "first_tweet_id": "2046288113916338566",
       "last_tweet_id": "2046376534362001491"
+    },
+    "57450455": {
+      "title": "The Secret",
+      "first_tweet_id": "2048826570488398145",
+      "last_tweet_id": "2048826570488398145"
     }
   },
   "pending_tweets": [
     {
       "order": 0,
       "text": "A stat about 1,000 deaths moves no one. One face does. In The Secret, Lee and Andrew Child echo Stalin's dark logic: abstraction kills empathy. For PMs, this is why user metrics alone never drive org change. One vivid customer story outperforms a slide of thousands.",
-      "posted": false,
-      "tweet_id": null,
+      "posted": true,
+      "tweet_id": "2048826570488398145",
       "book_id": "57450455",
       "book_title": "The Secret",
       "type": "book"
