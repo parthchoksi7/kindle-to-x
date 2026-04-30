@@ -101,8 +101,8 @@
     {
       "order": 3,
       "text": "Stalin's \"one death is a tragedy, a million deaths is a statistic\" isn't cynicism. It's a design principle. If you want people to care about your product, make them feel one user's pain, not a dashboard of aggregate suffering.",
-      "posted": false,
-      "tweet_id": null,
+      "posted": true,
+      "tweet_id": "2049913824505909615",
       "book_id": "57450455",
       "book_title": "The Secret",
       "type": "standalone"
