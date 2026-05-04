@@ -71,14 +71,19 @@
       "title": "The Secret",
       "first_tweet_id": "2048826570488398145",
       "last_tweet_id": "2048914774558486741"
+    },
+    "56591071": {
+      "title": "A 4-Step Framework for Building Delightful Products | Nesrine Changuel",
+      "first_tweet_id": "2051366215323640214",
+      "last_tweet_id": "2051366215323640214"
     }
   },
   "pending_tweets": [
     {
       "order": 0,
       "text": "Most PMs chase satisfaction. Nesrine Changuel argues in Lenny's Podcast that you should chase pride. Working with a founder serving musicians, she found that making users PROUD of a product is what triggers word-of-mouth. Satisfaction is silent. Pride spreads.",
-      "posted": false,
-      "tweet_id": null,
+      "posted": true,
+      "tweet_id": "2051366215323640214",
       "book_id": "56591071",
       "book_title": "A 4-Step Framework for Building Delightful Products | Nesrine Changuel",
       "type": "book"
