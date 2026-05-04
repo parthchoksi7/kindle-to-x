@@ -75,7 +75,7 @@
     "56591071": {
       "title": "A 4-Step Framework for Building Delightful Products | Nesrine Changuel",
       "first_tweet_id": "2051366215323640214",
-      "last_tweet_id": "2051366215323640214"
+      "last_tweet_id": "2051406598904443333"
     }
   },
   "pending_tweets": [
@@ -91,8 +91,8 @@
     {
       "order": 1,
       "text": "Changuel's Chrome tab management work revealed users treat tabs like reminders and to-dos, not just windows. The PM lesson: understanding the emotional job behind behavior unlocks better solutions than optimizing the obvious surface.",
-      "posted": false,
-      "tweet_id": null,
+      "posted": true,
+      "tweet_id": "2051406598904443333",
       "book_id": "56591071",
       "book_title": "A 4-Step Framework for Building Delightful Products | Nesrine Changuel",
       "type": "book"
