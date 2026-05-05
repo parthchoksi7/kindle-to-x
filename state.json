@@ -75,7 +75,7 @@
     "56591071": {
       "title": "A 4-Step Framework for Building Delightful Products | Nesrine Changuel",
       "first_tweet_id": "2051366215323640214",
-      "last_tweet_id": "2051406598904443333"
+      "last_tweet_id": "2051452019391725611"
     }
   },
   "pending_tweets": [
@@ -100,8 +100,8 @@
     {
       "order": 2,
       "text": "Changuel warns against convincing leaders to invest in delight. Align with what they already care about and show delight as the path there. So the real question for PMs: are you selling your ideas or connecting them?",
-      "posted": false,
-      "tweet_id": null,
+      "posted": true,
+      "tweet_id": "2051452019391725611",
       "book_id": "56591071",
       "book_title": "A 4-Step Framework for Building Delightful Products | Nesrine Changuel",
       "type": "book"
