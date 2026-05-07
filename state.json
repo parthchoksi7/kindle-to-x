@@ -109,8 +109,8 @@
     {
       "order": 3,
       "text": "Trying to convince your CEO that delight matters is the wrong move. Find out what they already care about, then show how delight gets them there. Alignment beats persuasion every time.",
-      "posted": false,
-      "tweet_id": null,
+      "posted": true,
+      "tweet_id": "2052454041641271424",
       "book_id": "56591071",
       "book_title": "A 4-Step Framework for Building Delightful Products | Nesrine Changuel",
       "type": "standalone"
