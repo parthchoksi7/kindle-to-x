@@ -117,17 +117,15 @@
     }
   ],
   "interview": {
-    "issue_number": 15,
+    "issue_number": 16,
     "questions": [
-      "Was there a moment this week where you felt like you were genuinely doing good PM work - not shipping something or running a clean meeting, just actually solving the right problem?",
-      "What's something you've read recently that you agreed with completely in the moment but then caught yourself not actually doing?"
+      "Was there a moment this week where you explained something to your daughter and it made you realize you'd been overcomplicating how you were explaining the same thing to adults at work?",
+      "What's something you've quietly changed how you do recently - not because you read it somewhere or someone told you, but just because the old way kept not working?"
     ],
-    "sent_at": "2026-05-01T17:57:38.668935+00:00",
+    "sent_at": "2026-05-08T18:08:32.271767+00:00",
     "pending_tweets": []
   },
   "question_history": [
-    "What's a problem you've been quietly solving in your head this week that hasn't made it into a single meeting or doc yet?",
-    "Since you've been off training, what's the thing that's been filling that thinking time - and is it actually useful or just noise?",
     "What's the last decision you made this week that felt right in the moment but you've been quietly second-guessing since?",
     "Has your daughter said something recently that was completely unreasonable but also kind of hard to argue with?",
     "What's the last thing you read where you thought \"this is exactly right\" - and then realised you'd been doing the opposite?",
@@ -141,6 +139,8 @@
     "Was there a moment this week where you gave someone feedback and immediately wondered if you'd been too soft or too blunt - and what made you second-guess it?",
     "What's the last thing you read during the training break that you'd have probably skimmed past if you'd been training - like the rest actually let it land differently?",
     "Was there a moment this week where you felt like you were genuinely doing good PM work - not shipping something or running a clean meeting, just actually solving the right problem?",
-    "What's something you've read recently that you agreed with completely in the moment but then caught yourself not actually doing?"
+    "What's something you've read recently that you agreed with completely in the moment but then caught yourself not actually doing?",
+    "Was there a moment this week where you explained something to your daughter and it made you realize you'd been overcomplicating how you were explaining the same thing to adults at work?",
+    "What's something you've quietly changed how you do recently - not because you read it somewhere or someone told you, but just because the old way kept not working?"
   ]
 }
