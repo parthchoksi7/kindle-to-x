@@ -85,7 +85,7 @@
     "58509026": {
       "title": "Zen Mind, Beginner's Mind",
       "first_tweet_id": "2053913352490058084",
-      "last_tweet_id": "2053913352490058084"
+      "last_tweet_id": "2053946032329802222"
     }
   },
   "pending_tweets": [
@@ -101,8 +101,8 @@
     {
       "order": 1,
       "text": "Suzuki describes beginner's mind as \"free of the habits of the expert, ready to accept, to doubt.\" For PMs, this is user research. The moment you think you know your user, you stop listening. Assumptions replace discovery and products suffer.",
-      "posted": false,
-      "tweet_id": null,
+      "posted": true,
+      "tweet_id": "2053946032329802222",
       "book_id": "58509026",
       "book_title": "Zen Mind, Beginner's Mind",
       "type": "book"
