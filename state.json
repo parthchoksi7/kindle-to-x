@@ -85,7 +85,7 @@
     "58509026": {
       "title": "Zen Mind, Beginner's Mind",
       "first_tweet_id": "2053913352490058084",
-      "last_tweet_id": "2053946032329802222"
+      "last_tweet_id": "2053989594924818635"
     }
   },
   "pending_tweets": [
@@ -110,8 +110,8 @@
     {
       "order": 2,
       "text": "The dangerous PM is not the junior one who asks too many questions. It is the senior one who stopped asking them. What assumptions about your users have you not questioned in the last 90 days?",
-      "posted": false,
-      "tweet_id": null,
+      "posted": true,
+      "tweet_id": "2053989594924818635",
       "book_id": "58509026",
       "book_title": "Zen Mind, Beginner's Mind",
       "type": "book"
