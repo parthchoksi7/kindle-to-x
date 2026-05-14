@@ -119,8 +119,8 @@
     {
       "order": 3,
       "text": "Expertise closes off possibilities. Beginner's mind opens them. The more you know, the fewer answers you see. The less you know, the more you can.",
-      "posted": false,
-      "tweet_id": null,
+      "posted": true,
+      "tweet_id": "2054998398361649379",
       "book_id": "58509026",
       "book_title": "Zen Mind, Beginner's Mind",
       "type": "standalone"
