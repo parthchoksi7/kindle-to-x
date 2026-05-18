@@ -125,14 +125,19 @@
       "title": "Zen Mind, Beginner's Mind",
       "first_tweet_id": "2053913352490058084",
       "last_tweet_id": "2053989594924818635"
+    },
+    "38397444": {
+      "title": "Good Strategy/Bad Strategy",
+      "first_tweet_id": "2056448568303489292",
+      "last_tweet_id": "2056448568303489292"
     }
   },
   "pending_tweets": [
     {
       "order": 0,
       "text": "Most companies don't have a strategy. They have a list of wishes. Rumelt argues in Good Strategy/Bad Strategy that if you skip diagnosing the real obstacle, what you call a strategy is just a budget or a stretch goal. PMs: your roadmap is not a strategy.",
-      "posted": false,
-      "tweet_id": null,
+      "posted": true,
+      "tweet_id": "2056448568303489292",
       "book_id": "38397444",
       "book_title": "Good Strategy/Bad Strategy",
       "type": "book"
