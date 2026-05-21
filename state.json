@@ -163,8 +163,8 @@
     {
       "order": 3,
       "text": "Universal buy-in on strategy usually means no real choice was made. When everyone agrees, it signals leadership lacked the will to say no to anyone. Good strategy makes some people worse off. That discomfort is the proof it is real.",
-      "posted": false,
-      "tweet_id": null,
+      "posted": true,
+      "tweet_id": "2057536413478912410",
       "book_id": "38397444",
       "book_title": "Good Strategy/Bad Strategy",
       "type": "standalone"
