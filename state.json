@@ -137,8 +137,8 @@
     {
       "order": 0,
       "text": "Here's the problem: the highlights you've shared are too fragmentary to extract a meaningful idea from. I only have one truncated passage that cuts off mid-sentence.\n\nShare more complete highlights and I'll write the tweet.",
-      "posted": false,
-      "tweet_id": null,
+      "posted": true,
+      "tweet_id": "2060082348754956681",
       "book_id": "58509028",
       "book_title": "The King",
       "type": "standalone"
