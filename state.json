@@ -145,17 +145,15 @@
     }
   ],
   "interview": {
-    "issue_number": 18,
+    "issue_number": 19,
     "questions": [
-      "Was there a moment this week where you caught yourself explaining something to a stakeholder and realized halfway through that you didn't actually believe the thing you were saying?",
-      "What's the last book idea you've been sitting with that you're pretty sure is right in theory but would cause problems if you actually applied it at work?"
+      "Was there a moment this week where you gave someone feedback you knew was right but softened it enough that you're not sure they actually heard it?",
+      "Since you've been off training, have you noticed anything filling that thinking time that's been surprisingly useful - or has it just become more Slack?"
     ],
-    "sent_at": "2026-05-22T18:52:29.122509+00:00",
+    "sent_at": "2026-05-29T19:30:48.900151+00:00",
     "pending_tweets": []
   },
   "question_history": [
-    "Was there a moment this week where you held back from saying what you actually thought in a meeting - and what made you decide not to say it?",
-    "What's the last thing your daughter did that you found yourself genuinely impressed by, even though you know you're not supposed to admit that?",
     "What's the last thing you read that you thought was slightly wrong, but you couldn't quite articulate why yet?",
     "Was there a moment this week where you caught yourself doing something as a PM that you'd have quietly judged someone else for doing?",
     "What's been sitting in the back of your head during the reading streak - the work problem you keep returning to even when you're trying not to think about work?",
@@ -169,6 +167,8 @@
     "Was there a moment this week where you said yes to something you knew you should have pushed back on - and what did you tell yourself to make it feel fine?",
     "What's something your daughter is currently obsessed with that you've started paying more attention to than you expected?",
     "Was there a moment this week where you caught yourself explaining something to a stakeholder and realized halfway through that you didn't actually believe the thing you were saying?",
-    "What's the last book idea you've been sitting with that you're pretty sure is right in theory but would cause problems if you actually applied it at work?"
+    "What's the last book idea you've been sitting with that you're pretty sure is right in theory but would cause problems if you actually applied it at work?",
+    "Was there a moment this week where you gave someone feedback you knew was right but softened it enough that you're not sure they actually heard it?",
+    "Since you've been off training, have you noticed anything filling that thinking time that's been surprisingly useful - or has it just become more Slack?"
   ]
 }
