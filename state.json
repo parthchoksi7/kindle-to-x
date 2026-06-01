@@ -146,14 +146,19 @@
       "title": "Good Strategy/Bad Strategy",
       "first_tweet_id": "2056448568303489292",
       "last_tweet_id": "2056448568303489292"
+    },
+    "58509030": {
+      "title": "The 5 Types of Wealth",
+      "first_tweet_id": "2061553076742258769",
+      "last_tweet_id": "2061553076742258769"
     }
   },
   "pending_tweets": [
     {
       "order": 0,
       "text": "Most PMs optimize for shipping faster, earning more, and hitting OKRs. But Bloom warns in The 5 Types of Wealth that winning those battles while ignoring time, health, and relationships is a Pyrrhic victory. You beat the metric. You lose the war.",
-      "posted": false,
-      "tweet_id": null,
+      "posted": true,
+      "tweet_id": "2061553076742258769",
       "book_id": "58509030",
       "book_title": "The 5 Types of Wealth",
       "type": "book"
