@@ -150,7 +150,7 @@
     "58509030": {
       "title": "The 5 Types of Wealth",
       "first_tweet_id": "2061553076742258769",
-      "last_tweet_id": "2061553076742258769"
+      "last_tweet_id": "2061576135100551238"
     }
   },
   "pending_tweets": [
@@ -166,8 +166,8 @@
     {
       "order": 1,
       "text": "Bloom's \"dimmer switch\" idea reframes how to balance competing priorities. No area goes fully off, it just dims. For PMs juggling roadmap pressure, team health, and personal bandwidth, this is a better mental model than zero-sum tradeoffs between work and everything else.",
-      "posted": false,
-      "tweet_id": null,
+      "posted": true,
+      "tweet_id": "2061576135100551238",
       "book_id": "58509030",
       "book_title": "The 5 Types of Wealth",
       "type": "book"
