@@ -150,7 +150,7 @@
     "58509030": {
       "title": "The 5 Types of Wealth",
       "first_tweet_id": "2061553076742258769",
-      "last_tweet_id": "2061576135100551238"
+      "last_tweet_id": "2061603571095704050"
     }
   },
   "pending_tweets": [
@@ -175,8 +175,8 @@
     {
       "order": 2,
       "text": "Bloom asks you to picture your ideal day at 80. Time, people, purpose, health. Almost no one pictures a perfect sprint velocity. So why does your weekly prioritization look nothing like that vision?",
-      "posted": false,
-      "tweet_id": null,
+      "posted": true,
+      "tweet_id": "2061603571095704050",
       "book_id": "58509030",
       "book_title": "The 5 Types of Wealth",
       "type": "book"
