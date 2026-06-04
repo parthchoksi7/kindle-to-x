@@ -184,8 +184,8 @@
     {
       "order": 3,
       "text": "Winning every money battle while losing on time, relationships, health, and purpose is still losing the war. Most people don't realize they've lost until it's too late to reverse it.",
-      "posted": false,
-      "tweet_id": null,
+      "posted": true,
+      "tweet_id": "2062616042195538200",
       "book_id": "58509030",
       "book_title": "The 5 Types of Wealth",
       "type": "standalone"
