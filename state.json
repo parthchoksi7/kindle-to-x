@@ -192,17 +192,15 @@
     }
   ],
   "interview": {
-    "issue_number": 19,
+    "issue_number": 20,
     "questions": [
-      "Was there a moment this week where you gave someone feedback you knew was right but softened it enough that you're not sure they actually heard it?",
-      "Since you've been off training, have you noticed anything filling that thinking time that's been surprisingly useful - or has it just become more Slack?"
+      "Was there a moment this week where you felt like you were actually doing the job well - not just surviving the meetings, but genuinely moving something forward - and what were you doing differently in that moment?",
+      "Is there something you've read recently that you've already mentally argued with more than once?"
     ],
-    "sent_at": "2026-05-29T19:30:48.900151+00:00",
+    "sent_at": "2026-06-05T18:56:29.802941+00:00",
     "pending_tweets": []
   },
   "question_history": [
-    "What's the last thing you read that you thought was slightly wrong, but you couldn't quite articulate why yet?",
-    "Was there a moment this week where you caught yourself doing something as a PM that you'd have quietly judged someone else for doing?",
     "What's been sitting in the back of your head during the reading streak - the work problem you keep returning to even when you're trying not to think about work?",
     "Was there a moment recently where you watched someone else run a meeting or make a call and thought \"I do that too\" - and you weren't sure how you felt about it?",
     "Was there a moment this week where you gave someone feedback and immediately wondered if you'd been too soft or too blunt - and what made you second-guess it?",
@@ -216,6 +214,8 @@
     "Was there a moment this week where you caught yourself explaining something to a stakeholder and realized halfway through that you didn't actually believe the thing you were saying?",
     "What's the last book idea you've been sitting with that you're pretty sure is right in theory but would cause problems if you actually applied it at work?",
     "Was there a moment this week where you gave someone feedback you knew was right but softened it enough that you're not sure they actually heard it?",
-    "Since you've been off training, have you noticed anything filling that thinking time that's been surprisingly useful - or has it just become more Slack?"
+    "Since you've been off training, have you noticed anything filling that thinking time that's been surprisingly useful - or has it just become more Slack?",
+    "Was there a moment this week where you felt like you were actually doing the job well - not just surviving the meetings, but genuinely moving something forward - and what were you doing differently in that moment?",
+    "Is there something you've read recently that you've already mentally argued with more than once?"
   ]
 }
