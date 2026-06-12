@@ -192,17 +192,15 @@
     }
   ],
   "interview": {
-    "issue_number": 20,
+    "issue_number": 21,
     "questions": [
-      "Was there a moment this week where you felt like you were actually doing the job well - not just surviving the meetings, but genuinely moving something forward - and what were you doing differently in that moment?",
-      "Is there something you've read recently that you've already mentally argued with more than once?"
+      "Was there a moment this week where you explained a decision to someone and realized the real reason you made it was different from the reason you gave them?",
+      "Has your daughter done something recently that was completely irrational but also kind of the right call?"
     ],
-    "sent_at": "2026-06-05T18:56:29.802941+00:00",
+    "sent_at": "2026-06-12T19:02:59.944875+00:00",
     "pending_tweets": []
   },
   "question_history": [
-    "What's been sitting in the back of your head during the reading streak - the work problem you keep returning to even when you're trying not to think about work?",
-    "Was there a moment recently where you watched someone else run a meeting or make a call and thought \"I do that too\" - and you weren't sure how you felt about it?",
     "Was there a moment this week where you gave someone feedback and immediately wondered if you'd been too soft or too blunt - and what made you second-guess it?",
     "What's the last thing you read during the training break that you'd have probably skimmed past if you'd been training - like the rest actually let it land differently?",
     "Was there a moment this week where you felt like you were genuinely doing good PM work - not shipping something or running a clean meeting, just actually solving the right problem?",
@@ -216,6 +214,8 @@
     "Was there a moment this week where you gave someone feedback you knew was right but softened it enough that you're not sure they actually heard it?",
     "Since you've been off training, have you noticed anything filling that thinking time that's been surprisingly useful - or has it just become more Slack?",
     "Was there a moment this week where you felt like you were actually doing the job well - not just surviving the meetings, but genuinely moving something forward - and what were you doing differently in that moment?",
-    "Is there something you've read recently that you've already mentally argued with more than once?"
+    "Is there something you've read recently that you've already mentally argued with more than once?",
+    "Was there a moment this week where you explained a decision to someone and realized the real reason you made it was different from the reason you gave them?",
+    "Has your daughter done something recently that was completely irrational but also kind of the right call?"
   ]
 }
