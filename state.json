@@ -192,17 +192,15 @@
     }
   ],
   "interview": {
-    "issue_number": 22,
+    "issue_number": 23,
     "questions": [
-      "Was there something you read this week that you agreed with completely in the moment and then caught yourself doing the opposite of an hour later?",
-      "Has there been a moment recently where you let a meeting end without saying the thing you actually needed to say - and what made you hold it back?"
+      "Was there a moment this week where you made a call you were confident about, but the way you explained it to the room made it sound less certain than you actually were?",
+      "Has your daughter wanted something recently where her logic for why she should have it was completely wrong but her instinct about what she needed was completely right?"
     ],
-    "sent_at": "2026-06-19T18:53:00.956337+00:00",
+    "sent_at": "2026-06-26T18:50:24.092006+00:00",
     "pending_tweets": []
   },
   "question_history": [
-    "Was there a moment this week where you felt like you were genuinely doing good PM work - not shipping something or running a clean meeting, just actually solving the right problem?",
-    "What's something you've read recently that you agreed with completely in the moment but then caught yourself not actually doing?",
     "Was there a moment this week where you explained something to your daughter and it made you realize you'd been overcomplicating how you were explaining the same thing to adults at work?",
     "What's something you've quietly changed how you do recently - not because you read it somewhere or someone told you, but just because the old way kept not working?",
     "Was there a moment this week where you said yes to something you knew you should have pushed back on - and what did you tell yourself to make it feel fine?",
@@ -216,6 +214,8 @@
     "Was there a moment this week where you explained a decision to someone and realized the real reason you made it was different from the reason you gave them?",
     "Has your daughter done something recently that was completely irrational but also kind of the right call?",
     "Was there something you read this week that you agreed with completely in the moment and then caught yourself doing the opposite of an hour later?",
-    "Has there been a moment recently where you let a meeting end without saying the thing you actually needed to say - and what made you hold it back?"
+    "Has there been a moment recently where you let a meeting end without saying the thing you actually needed to say - and what made you hold it back?",
+    "Was there a moment this week where you made a call you were confident about, but the way you explained it to the room made it sound less certain than you actually were?",
+    "Has your daughter wanted something recently where her logic for why she should have it was completely wrong but her instinct about what she needed was completely right?"
   ]
 }
