@@ -192,17 +192,15 @@
     }
   ],
   "interview": {
-    "issue_number": 23,
+    "issue_number": 24,
     "questions": [
-      "Was there a moment this week where you made a call you were confident about, but the way you explained it to the room made it sound less certain than you actually were?",
-      "Has your daughter wanted something recently where her logic for why she should have it was completely wrong but her instinct about what she needed was completely right?"
+      "Was there something you had to explain this week where you kept simplifying it down, and at some point wondered if you'd simplified out the part that actually mattered?",
+      "Since you've been off training, has anything unexpected started filling that thinking time - and is it actually working the same way, or does it just feel like it should?"
     ],
-    "sent_at": "2026-06-26T18:50:24.092006+00:00",
+    "sent_at": "2026-07-03T18:11:19.578700+00:00",
     "pending_tweets": []
   },
   "question_history": [
-    "Was there a moment this week where you explained something to your daughter and it made you realize you'd been overcomplicating how you were explaining the same thing to adults at work?",
-    "What's something you've quietly changed how you do recently - not because you read it somewhere or someone told you, but just because the old way kept not working?",
     "Was there a moment this week where you said yes to something you knew you should have pushed back on - and what did you tell yourself to make it feel fine?",
     "What's something your daughter is currently obsessed with that you've started paying more attention to than you expected?",
     "Was there a moment this week where you caught yourself explaining something to a stakeholder and realized halfway through that you didn't actually believe the thing you were saying?",
@@ -216,6 +214,8 @@
     "Was there something you read this week that you agreed with completely in the moment and then caught yourself doing the opposite of an hour later?",
     "Has there been a moment recently where you let a meeting end without saying the thing you actually needed to say - and what made you hold it back?",
     "Was there a moment this week where you made a call you were confident about, but the way you explained it to the room made it sound less certain than you actually were?",
-    "Has your daughter wanted something recently where her logic for why she should have it was completely wrong but her instinct about what she needed was completely right?"
+    "Has your daughter wanted something recently where her logic for why she should have it was completely wrong but her instinct about what she needed was completely right?",
+    "Was there something you had to explain this week where you kept simplifying it down, and at some point wondered if you'd simplified out the part that actually mattered?",
+    "Since you've been off training, has anything unexpected started filling that thinking time - and is it actually working the same way, or does it just feel like it should?"
   ]
 }
