@@ -192,17 +192,15 @@
     }
   ],
   "interview": {
-    "issue_number": 24,
+    "issue_number": 25,
     "questions": [
-      "Was there something you had to explain this week where you kept simplifying it down, and at some point wondered if you'd simplified out the part that actually mattered?",
-      "Since you've been off training, has anything unexpected started filling that thinking time - and is it actually working the same way, or does it just feel like it should?"
+      "Was there a moment this week where you felt like you were doing the right PM thing - slowing down, asking questions, not rushing to a solution - but part of you knew you were actually just avoiding making the call?",
+      "Has your daughter discovered something recently that she's completely obsessed with, and have you noticed yourself getting pulled into it too - and what does that say about how you actually learn things?"
     ],
-    "sent_at": "2026-07-03T18:11:19.578700+00:00",
+    "sent_at": "2026-07-10T18:21:29.524327+00:00",
     "pending_tweets": []
   },
   "question_history": [
-    "Was there a moment this week where you said yes to something you knew you should have pushed back on - and what did you tell yourself to make it feel fine?",
-    "What's something your daughter is currently obsessed with that you've started paying more attention to than you expected?",
     "Was there a moment this week where you caught yourself explaining something to a stakeholder and realized halfway through that you didn't actually believe the thing you were saying?",
     "What's the last book idea you've been sitting with that you're pretty sure is right in theory but would cause problems if you actually applied it at work?",
     "Was there a moment this week where you gave someone feedback you knew was right but softened it enough that you're not sure they actually heard it?",
@@ -216,6 +214,8 @@
     "Was there a moment this week where you made a call you were confident about, but the way you explained it to the room made it sound less certain than you actually were?",
     "Has your daughter wanted something recently where her logic for why she should have it was completely wrong but her instinct about what she needed was completely right?",
     "Was there something you had to explain this week where you kept simplifying it down, and at some point wondered if you'd simplified out the part that actually mattered?",
-    "Since you've been off training, has anything unexpected started filling that thinking time - and is it actually working the same way, or does it just feel like it should?"
+    "Since you've been off training, has anything unexpected started filling that thinking time - and is it actually working the same way, or does it just feel like it should?",
+    "Was there a moment this week where you felt like you were doing the right PM thing - slowing down, asking questions, not rushing to a solution - but part of you knew you were actually just avoiding making the call?",
+    "Has your daughter discovered something recently that she's completely obsessed with, and have you noticed yourself getting pulled into it too - and what does that say about how you actually learn things?"
   ]
 }
